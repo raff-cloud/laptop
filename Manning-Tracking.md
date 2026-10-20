@@ -22,6 +22,11 @@ Only one firm window has gone out in writing: end of Oct / early Nov (Aug 17). I
 - Tendering is underway: about 40 bid requests in JobTread (sent Sep 28 to Oct 13), 11 approved.
 - Open items: final permit drawings (Pino & Parente), add-on pricing (exterior brick veneer for neighbour Peter), interior design scope (Alyssa).
 
+## Deadline: bids and schedule (set Oct 20)
+
+- JobTread to-do assigned to **David**, due **Fri Oct 23, 5 PM**. All bids finalized and the full construction schedule built, with every component in it. 20-item checklist. David is asked to confirm his commitment in the task.
+- The earlier to-do "Tendering - All Important divisions" (David, due Oct 9) is still open and overdue.
+
 ## Billing (JobTread)
 
 - 5% deposit, $6,151.51: invoiced and approved Jul 10.
