@@ -27,6 +27,27 @@ Only one firm window has gone out in writing: end of Oct / early Nov (Aug 17). I
 - JobTread to-do assigned to **David**, due **Fri Oct 23, 5 PM**. All bids finalized and the full construction schedule built, with every component in it. 20-item checklist. David is asked to confirm his commitment in the task.
 - The earlier to-do "Tendering - All Important divisions" (David, due Oct 9) is still open and overdue.
 
+## Bid leveling (as of Oct 20)
+
+Tolerance (Tendering SOP, Step 5): total cost must not exceed contract sell ÷ 1.35. Base contract sell is $114,070, so the **cost target is $84,496**. Internal base budget: $111,799.
+
+| Division | Budget | Low bid (approved) | Other bids | Variance |
+|---|---|---|---|---|
+| General Works + Demo | $36,331 | Renomar $57,100 | FV Renovations pending; Doctor Demo pending; 2 declined | +$20,769 |
+| Framing | $23,128 | Aryan $14,000 | New Age pending; 1 declined | -$9,128 |
+| Lumber | $4,900 | RONA $6,386 | Central Fairbank $7,040; KOTT $7,209 | +$1,486 |
+| Flat Roofing | $8,010 | Alps $15,700 | Safety Roofing combo (see below); 2 declined | +$7,690 |
+| Siding | $17,750 | Baz Aluminum $7,900 | Safety Roofing combo; 1 declined | -$9,850 |
+| HVAC | $6,750 | Ideal Heating $9,370 | MiTech $9,950; 2 declined | +$2,620 |
+| Spray Foam | $3,430 | FoamIt $3,361 | none | -$70 |
+| Site Services | $11,500 | not priced | n/a | budget carried |
+| **Base total** | **$111,799** | **$125,317** | | **+$13,518** |
+
+- Safety Roofing combo (siding, flat roof and skylight): $20,580, vs $23,600 for Alps + Baz. That brings the base total to $122,297.
+- Against the $84,496 cost target: **$37,800 to $40,821 over**. At these numbers the base scope loses $8,200 to $11,200 on a $114,070 sell.
+- Add-ons: brick veneer $31,200 (Amoroso; client was told about $8K). Interior brick $10,800 (budget $3,960; client quoted about $3,600 sell). Skylight $3,300 (Skylight Services) or $300 (Aluplex).
+- Client-paid windows: JS $7,850, Kingshore $8,340, WELDA $9,646 (budget $8,470).
+
 ## Billing (JobTread)
 
 - 5% deposit, $6,151.51: invoiced and approved Jul 10.
