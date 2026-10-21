@@ -1,0 +1,146 @@
+Client Block,Cost Group,Cost Item Code,Cost Item,Description,COG,Quantity,Unit Type,Unit Cost,Cost,Margin?,Note
+1 OWNER DIRECT (at cost),PRE-CONSTRUCTION,1.016,Building Permit Fees,"Building permit fees, City of Hamilton (new SFD + grading review). Pass-through at cost.",Trade Partners,1,Lump Sum,12000.00,12000.00,No,
+1 OWNER DIRECT (at cost),PRE-CONSTRUCTION,1.034,Development Charges,"Development charges, City of Hamilton. Knock-down-rebuild default; demolition credit to be confirmed.",Trade Partners,1,Lump Sum,45000.00,45000.00,No,
+1 OWNER DIRECT (at cost),PRE-CONSTRUCTION,1.035,Utility Connection Fees,"Utility connection fees bundle: water/sewer permits, gas and hydro service fees. Pass-through at cost.",Trade Partners,1,Lump Sum,15000.00,15000.00,No,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.002,City Permit Package,"City permit package: zoning review, application forms and submission to City of Hamilton.",Trade Partners,1,Lump Sum,15000.00,15000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.007,"Engineering (Structural, Mechanical & Heat Loss)","Engineering: structural (steel beams, lintels), HVAC design and heat loss / SB-12 EEDS.",Trade Partners,1,Lump Sum,7000.00,7000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.020,Site Field Reviews by Engineer,AM Engineering site reviews: servicing inspection and lot grading.,Materials + Labor,2,Each,1800.00,3600.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.021,Tarion Warranty Enrollment,Tarion new home warranty enrolment.,Trade Partners,1,Lump Sum,8500.00,8500.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.029,Permit Coordination Fee,"Permit coordination with City, designer (Bobicon) and AM Engineering through issuance.",Trade Partners,1,Lump Sum,3000.00,3000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.030,"Surveyor Stakeout, Footing Pins & Wall Pins","Surveyor stakeout, footing pins and wall pins.",Trade Partners,1,Lump Sum,2200.00,2200.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.031,As-Built Survey / Survey Revisions,As-built / foundation location survey.,Trade Partners,1,Lump Sum,1800.00,1800.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.036,Tree Protection,Tree protection hoarding at City boulevard tree per City of Hamilton requirements.,Materials + Labor,1,Lump Sum,4500.00,4500.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.040,Site Supervision & Project Management (Blended Monthly),"Site supervision and project management, 6 months demo through drywall.",Labor,6,Months,12000.00,72000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.042,Temporary Hoarding & Safety Fences,"Temporary construction fence, front and sides.",Trade Partners,160,Linear Feet,45.00,7200.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.043,Temporary Toilet,"Temporary toilet, 6 months.",Materials,6,Months,250.00,1500.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.044,Temporary Hydro,Temporary hydro service.,Trade Partners,1,Lump Sum,3500.00,3500.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.045,Temporary Water,Temporary water.,Trade Partners,1,Lump Sum,2800.00,2800.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.046,Temporary Heating (Winter),"Temporary heat, winter months (if schedule falls in winter).",Trade Partners,3,Months,2200.00,6600.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.047,Crane Service (incl. Operator & Rigging),"Crane with operator to set roof trusses, 1 day.",Trade Partners,1,Days,2800.00,2800.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.050,Scaffold Rental,"Scaffold rental for masonry and stucco, 4 months.",Trade Partners,4,Months,1500.00,6000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.051,Waste Disposal / Garbage Bins,"Waste bins and disposal, 6 months.",Materials + Labor,6,Months,1800.00,10800.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.052,Miscellaneous Supplies & Materials,Miscellaneous supplies and materials.,Materials,1,Lump Sum,8000.00,8000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.053,Safety Supplies,"Safety supplies, fall protection, first aid.",Materials,1,Lump Sum,3500.00,3500.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.054,Site Signage,Site signage.,Labor,1,Each,450.00,450.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.056,Sidewalk / Road Protection,Sidewalk and road protection; existing driveway kept for access during construction.,Materials + Labor,1,Lump Sum,3000.00,3000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.063,Insurance,Builder's risk insurance.,Trade Partners,1,Lump Sum,1200.00,1200.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.067,Hazardous Substance Report,Designated substance survey of existing house before demolition (O. Reg. 278/05).,Trade Partners,1,Lump Sum,1200.00,1200.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.068,Environmental Abatement,Provisional environmental abatement allowance for existing house (asbestos/vermiculite).,Trade Partners,1,Lump Sum,8000.00,8000.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.069,Line Protection / Utility Locates,Utility locates.,Trade Partners,1,Lump Sum,900.00,900.00,Yes,
+2 FIXED COST - to drywall & prime,PRE-CONSTRUCTION,1.070,Truss Layout Drawings,Truss layout drawings for hip roof and girder trusses.,Trade Partners,1,Lump Sum,1500.00,1500.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.001,House Demolition,"Demolish existing 1-storey dwelling incl. basement, foundations and rear shed; dispose.",Labor,1300,Square Foot,12.00,15600.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.003,Site Clearing,"Site clearing of shrubs, vegetation and stumps within the building and work area.",Trade Partners,1,Lump Sum,12000.00,12000.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.019,Excavation & Ground works,"Excavate basement (1,460 SF, BFE 98.55) plus overdig and frost wall trenches; incl. haul-away of excess per index scope.",Trade Partners,600,Cubic Yard,22.00,13200.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.046,"Footings (Forming, Rebar & Concrete)","Strip footings at basement, garage and patio frost walls plus pad footings, all-in.",Trade Partners,314,Linear Feet,70.00,21980.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.051,Waterproofing,Bituminous dampproofing and drainage mat on basement walls below grade.,Trade Partners,1360,Square Foot,12.00,16320.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.053,Weeping Tile,Weeping tile at basement footing perimeter to sump.,Trade Partners,181,Linear Feet,28.00,5068.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.054,Basement Slab,"Basement slab: 3"" 25 MPa on 6"" granular, R10 perimeter insulation per slab detail.",Trade Partners,1460,Square Foot,12.00,17520.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.054,Basement Slab,Garage slab on compacted granular.,Trade Partners,548,Square Foot,12.00,6576.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.056,Porch Slabs,Front porch (60 SF) and raised rear covered patio (204 SF) slabs.,Trade Partners,264,Square Foot,22.00,5808.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.058,"Perimeter Drainage 3/4"" Crush","3/4"" clear stone cover over weeping tile.",Materials + Labor,90,Ton,48.00,4320.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.070,Backfill,Backfill foundation walls and frost walls.,Trade Partners,190,Cubic Yard,28.00,5320.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.071,Service Trenching,Service trenching for new water and sewer laterals to 1.0 m from building face.,Trade Partners,50,Linear Feet,85.00,4250.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.073,Rough Grading,Rough grading around building per AM Engineering grading plan.,Trade Partners,2500,Square Foot,5.00,12500.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.080,"Foundation Walls - Poured In Place (8"" formed, 3-bar)","Basement foundation walls incl. cold room, approx. 8'-10"" high, all-in. Drawings show 10""/12"" walls; confirm thickness.",Trade Partners,181,Linear Feet,150.00,27150.00,Yes,
+2 FIXED COST - to drywall & prime,EXCAVATION & FOUNDATION,2.080,"Foundation Walls - Poured In Place (8"" formed, 3-bar)","Garage and rear patio frost walls (unexcavated areas), all-in.",Trade Partners,113,Linear Feet,150.00,16950.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.001,Plumbing - Underground,"Underground plumbing: basement drains, sump, floor drain, 3-pc rough-in drains, radon rough-in, laterals.",Trade Partners,100,Linear Feet,85.00,8500.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.002,Framing Materials,"Framing materials: house 2,930 SF + garage 548 SF, incl. floors, walls, roof trusses, flat roofs, sheathing. LIVE LUMBER QUOTE REQUIRED.",Materials + Labor,3478,Square Foot,20.00,69560.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.006,Framing Labour,"Framing labour, same area.",Materials + Labor,3478,Square Foot,18.00,62604.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.009,Steel Beams,"Steel beams: W10x22 x2 (basement), W8x28, W8x31/W10x22, W8x18 x2, W10x26 (garage).",Materials + Labor,7,Each,4500.00,31500.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.010,Steel Posts,Steel posts / columns with base plates.,Materials + Labor,5,Each,1200.00,6000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.014,Roofing material & labour (Shingle),"Asphalt shingle hip roof incl. underlayment, ice & water, flashings and roof vents (5/12, approx. 1,850 SF).",Trade Partners,1850,Square Foot,8.00,14800.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.015,Torch on install and supply (Flat Roof),"Torch-on flat roof membrane over garage, front porch, rear patio and front roof sections, sloped 2% to scuppers.",Trade Partners,950,Square Foot,12.00,11400.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.019,Windows (Basic vinyl),"Vinyl double-pane low-E windows W1-W8 (14 units, approx. 430 SF), supply and install.",Materials + Labor,430,Square Foot,42.00,18060.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.019,Windows (Basic vinyl),"D3 vinyl patio sliding door 8'-0"" x 9'-0"" with transom, supply and install.",Materials + Labor,72,Square Foot,42.00,3024.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.027,Exterior Doors (Basic Steel),"Insulated steel exterior doors: D1 entry (with 2 sidelights), D2 garage man door, garage-to-house door (self-closing, gas-proofed).",Materials + Labor,3,Each,1800.00,5400.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.028,Exterior Door Installation,Exterior door installation.,Materials + Labor,3,Each,650.00,1950.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.029,Exterior Door Hardware,"Exterior door hardware (basic lever / entry handleset, deadbolt).",Materials + Labor,3,Each,350.00,1050.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.030,Garage Doors (standard size),"D4 16'-0"" x 8'-0"" insulated steel garage door (opener not included).",Trade Partners,1,Each,3500.00,3500.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.032,Flashing and aluminum capping,Aluminum parapet capping and flashing at flat roofs.,Trade Partners,165,Linear Feet,45.00,7425.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.033,"HVAC - Finish, Equipment Set & Startup","HVAC finish, equipment set and startup.",Trade Partners,1,Lump Sum,6000.00,6000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.035,Gas - Finish & Appliance Connections,Gas finish and appliance connections.,Trade Partners,1,Lump Sum,2000.00,2000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.037,Plumbing - Finish & Fixture Set,Plumbing finish and fixture set (fixtures by allowance).,Trade Partners,1,Lump Sum,4000.00,4000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.040,"Electrical - Finish, Devices & Fixture Hookup","Electrical finish, devices and fixture hookup (fixtures by allowance).",Trade Partners,1,Lump Sum,7000.00,7000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.042,Low voltage rough wire,Low-voltage rough wire: data/coax to main locations.,Trade Partners,200,Linear Feet,18.00,3600.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.046,Electrical - Underground,Electrical underground service trench from street.,Trade Partners,50,Linear Feet,65.00,3250.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.047,Rough-In Plumbing,"Plumbing rough-in: powder room, main bath, ensuite, kitchen, laundry, 2 hose bibs; basement 3-pc rough-in only.",Trade Partners,1,Lump Sum,18000.00,18000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.048,Rough-In Gas & Venting,"Gas rough-in and venting: furnace, water heater, range.",Trade Partners,1,Lump Sum,6500.00,6500.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.049,Rough-In HVAC,"HVAC: high-efficiency gas furnace, central A/C, HRV, ductwork and controls.",Trade Partners,1,Lump Sum,22000.00,22000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.050,Electrical Service (200 Amp if required),New 200 A electrical service and panel.,Trade Partners,1,Lump Sum,8500.00,8500.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.051,Electrical Rough-In,"Electrical rough-in: devices, pot lights, smoke/CO, appliance circuits; basic code lighting/outlets in basement.",Trade Partners,1,Lump Sum,18000.00,18000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.053,Spray-foam,Closed-cell spray foam at flat roof over office/entry and rim joists.,Trade Partners,500,Square Foot,14.00,7000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.054,Batt Insulation,"R22 batt + 6 mil poly at above-grade walls (3,060 SF) and full-height basement wall blanket (1,450 SF).",Trade Partners,4510,Square Foot,2.00,9020.00,Yes,Override from index $6.50
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.056,Air Testing (prior to drywall),Mid-construction air test before drywall (SB-12 performance path).,Trade Partners,1,Lump Sum,2800.00,2800.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.061,House Wrap,Sheathing membrane (Tyvek) behind brick/stone veneer.,Trade Partners,2200,Square Foot,3.50,7700.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.069,Soffits,Prefinished aluminum soffit.,Trade Partners,220,Linear Feet,16.00,3520.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.070,Fascia,Prefinished aluminum fascia.,Trade Partners,220,Linear Feet,14.00,3080.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.071,Eavestroughs & Downspouts,Eavestrough and downspouts.,Trade Partners,220,Linear Feet,16.00,3520.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.072,Exterior Caulking,"Exterior caulking at windows, doors and penetrations.",Trade Partners,370,Linear Feet,12.00,4440.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.073,Exterior Masonry material,"Brick and stone veneer, main floor and 4 stone columns, incl. ties, precast sills, brick ledge (supply and install).",Trade Partners,2200,Square Foot,45.00,99000.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.078,Stucco,"Stucco veneer w/ R5 rigid, 2nd floor and parapets (supply and install).",Trade Partners,1850,Square Foot,28.00,51800.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.105,Concrete Pump (hardscape),"Concrete pumping, all foundation and slab pours (approx. 100 CY).",Materials + Labor,100,Cubic Yard,22.00,2200.00,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.125,Insulation (Blown-in),Blown-in attic insulation to SB-12 value.,Trade Partners,1470,Square Foot,2.25,3307.50,Yes,
+2 FIXED COST - to drywall & prime,ROUGH STRUCTURE,3.133,Back Framing - Whole-House Basis (budget stage),"Back framing, whole-house budget basis (blocking, bulkheads, stair framing).",Trade Partners,2930,Square Foot,4.00,11720.00,Yes,
+2 FIXED COST - to drywall & prime,FINISHING TRADES,4.001,"Drywall (1/2"")","Drywall, Level 4 finish: main and 2nd floor + garage (rate on floor area). Basement NOT drywalled.",Trade Partners,3478,Square Foot,14.00,48692.00,Yes,
+2 FIXED COST - to drywall & prime,FINISHING TRADES,4.002,Interior Painting - Prime Coat,"Interior prime coat, main and 2nd floor.",Trade Partners,2930,Square Foot,1.50,4395.00,Yes,
+2 FIXED COST - to drywall & prime,COMPLETION,5.001,Consumables (Miscellaneous construction materials),Consumables.,Trade Partners,1,Lump Sum,4500.00,4500.00,Yes,
+2 FIXED COST - to drywall & prime,COMPLETION,5.013,Final Site Cleanup,Site cleanup at drywall turnover.,Labor,1,Lump Sum,5500.00,5500.00,Yes,
+2 FIXED COST - to drywall & prime,COMPLETION,5.020,Demobilization,Demobilization.,Labor,1,Lump Sum,500.00,500.00,Yes,
+2 FIXED COST - to drywall & prime,COMPLETION,5.021,Sign Removal,Sign removal.,Labor,1,Lump Sum,250.00,250.00,Yes,
+2 FIXED COST - to drywall & prime,COMPLETION,5.025,Construction Contingency,"Construction contingency, 5% of Fixed hard cost (budget reserve, not margin)",Trade Partners,5,%,,49383.98,Yes,Index default 10%
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.091,Exterior Lighting,Exterior light fixture allowance.,Trade Partners,6,Each,150.00,900.00,Yes,Override from index $450.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.092,Exterior Railing,Exterior aluminum vista railing at raised patio and front steps.,Trade Partners,37,Linear Feet,85.00,3145.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.108,Masonry Supply,"Precast steps, front porch and rear patio (supply).",Trade Partners,40,Square Foot,65.00,2600.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.109,Masonry Labour,"Precast steps, install.",Trade Partners,40,Square Foot,45.00,1800.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.110,Asphalt areas,"New asphalt driveway (approx. 24'-6"" x 36').",Trade Partners,880,Square Foot,8.00,7040.00,Yes,Override from index $18.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.120,Grass roll Supply,"Sod supply, disturbed areas.",Trade Partners,5000,Square Foot,1.25,6250.00,Yes,Override from index $8.50
+3 FINISHED MATERIAL BUDGET - entry level (optional),ROUGH STRUCTURE,3.121,Grass roll Labour,Sod install.,Trade Partners,5000,Square Foot,1.00,5000.00,Yes,Override from index $6.50
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.004,Interior Doors,"Interior doors, hollow-core moulded slab, pre-hung, installed.",Materials + Labor,22,Each,650.00,14300.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.006,Interior Door Hardware,"Interior door hardware, entry-level levers.",Materials + Labor,22,Each,45.00,990.00,Yes,Override from index $280.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.008,Molding Materials,"MDF baseboard and casing, paint grade.",Trade Partners,2100,Linear Feet,4.00,8400.00,Yes,Override from index $12.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.010,Finish Carpentry (Trim Moldings and doors labour),"Finish carpentry labour, trim install.",Materials + Labor,140,Hours,85.00,11900.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.013,"Tile Setting Materials (thinset, membrane, backer)","Tile setting materials, floors.",Trade Partners,335,Square Foot,8.50,2847.50,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.014,Tile Installation Labour (general floor & wall),"Tile install labour, floors.",Trade Partners,335,Square Foot,15.00,5025.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.029,Interior Railing,"Interior railing, stair and 2nd floor landing, entry-level oak/picket.",Trade Partners,34,Linear Feet,120.00,4080.00,Yes,Override from index $200.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.030,Custom Stairs,Main-to-2nd floor stair finish (basement stair left as framed).,Trade Partners,1,Lump Sum,5000.00,5000.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.032,Cabinets - Pre-manufactured,"Pre-manufactured cabinets: kitchen, island, pantry, laundry.",Trade Partners,40,Linear Feet,280.00,11200.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.034,Cabinet install,Cabinet install.,Trade Partners,40,Linear Feet,85.00,3400.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.035,Countertops,"Countertops, entry-level quartz/laminate, kitchen and island.",Trade Partners,95,Square Foot,65.00,6175.00,Yes,Override from index $110.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.037,Appliance Package,"Appliance package allowance, entry level (fridge, range, DW, hood, W/D).",Trade Partners,1,Lump Sum,9000.00,9000.00,Yes,"Override from index $30,000.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.040,Hardware & Accessories fixtures,"Bath accessories (towel bars, TP holders).",Materials + Labor,9,Each,120.00,1080.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.050,Plumbing Fixture Allowance,"Plumbing fixture allowance (3 toilets, faucets, tub, freestanding tub, shower valve, kitchen sink, laundry tub).",Trade Partners,1,Lump Sum,9000.00,9000.00,Yes,"Override from index $25,000.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.051,Lighting Fixture Allowance,Interior lighting fixture allowance.,Trade Partners,1,Lump Sum,4500.00,4500.00,Yes,"Override from index $15,000.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.052,Flooring Allowance (if applicable),"Flooring allowance: vinyl plank / laminate, main and 2nd floor, supply and install.",Trade Partners,2450,Square Foot,8.00,19600.00,Yes,Override from index $12.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.053,Tile Allowance (if applicable),"Tile supply allowance: bath/laundry/entry floors, shower and tub walls, backsplash.",Trade Partners,505,Square Foot,6.00,3030.00,Yes,Override from index $18.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.054,Cabinet Hardware Allowance (if applicable),Cabinet hardware allowance.,Trade Partners,1,Lump Sum,600.00,600.00,Yes,"Override from index $2,800.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.058,Shower Glass,Ensuite shower glass.,Trade Partners,1,Each,1500.00,1500.00,Yes,"Override from index $1,800.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.060,Tile Shower Floor - Install (labour + setting materials),"Tile install, ensuite shower floor.",Materials,16,Square Foot,12.00,192.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.061,Tile Shower Wall - Install (labour + setting materials),"Tile install, shower and tub walls (labour + setting materials).",Materials,140,Square Foot,18.00,2520.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.062,Tile Backsplash - Install (labour + setting materials),"Tile install, kitchen backsplash.",Materials,30,Square Foot,38.00,1140.00,Yes,
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.064,Bath Vanities,"Bath vanities with tops: powder, main bath, ensuite.",Trade Partners,3,Each,1200.00,3600.00,Yes,"Override from index $3,500.00"
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.069,Mirrors,Bathroom mirrors.,Materials + Labor,3,Each,250.00,750.00,Yes,Override from index $400.00
+3 FINISHED MATERIAL BUDGET - entry level (optional),FINISHING TRADES,4.070,Interior Painting - Finish Coats,"Interior finish paint, 2 coats, builder white, main and 2nd floor.",Trade Partners,2930,Square Foot,3.50,10255.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),PRE-CONSTRUCTION,1.040,Site Supervision & Project Management (Blended Monthly),"Site supervision and PM, finishing phase, 3 additional months.",Labor,3,Months,12000.00,36000.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),PRE-CONSTRUCTION,1.051,Waste Disposal / Garbage Bins,"Waste bins, finishing phase.",Materials + Labor,2,Months,1800.00,3600.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),ROUGH STRUCTURE,3.060,Final Air test,Final air test.,Trade Partners,1,Lump Sum,1800.00,1800.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.005,Final Grade,Final grading and lot grading certificate.,Trade Partners,2500,Square Foot,4.50,11250.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.006,HVAC Balancing,HVAC balancing.,Trade Partners,1,Lump Sum,1800.00,1800.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.007,Electrical Inspection (ESA),ESA final inspection.,Trade Partners,1,Lump Sum,1200.00,1200.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.008,Final Building Inspections,Final building inspections.,Trade Partners,1,Lump Sum,2500.00,2500.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.009,Occupancy Requirements,Occupancy requirements.,Trade Partners,1,Lump Sum,1500.00,1500.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.010,Professional Final Cleaning,Professional final cleaning.,Trade Partners,1,Lump Sum,4500.00,4500.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.012,Deficiency Completion / Touch-Ups,Deficiency completion and touch-ups.,Trade Partners,1,Lump Sum,8500.00,8500.00,Yes,
+3b COMPLETION TO OCCUPANCY (optional),COMPLETION,5.014,Warranty Service Allowance,Warranty service reserve.,Trade Partners,1,Lump Sum,12000.00,12000.00,Yes,
+
+SUMMARY
+,,,Owner Direct (at cost),,,,,,72000.00
+,,,Fixed hard cost,,,,,,987679.50
+,,,Contingency 5%,,,,,,49383.98
+,,,Fixed cost incl. contingency,,,,,,1037063.48
+,,,Fixed SELL @ 40% margin (cost / 0.60),,,,,,1728439.13
+,,,Finished Material Budget cost,,,,,,166819.50
+,,,Finished Material Budget SELL,,,,,,278032.50
+,,,Completion to occupancy cost,,,,,,84650.00
+,,,Completion to occupancy SELL,,,,,,141083.33
+,,,CLIENT TOTAL - to drywall (pre-HST),,,,,,1800439.13
+,,,CLIENT TOTAL - turnkey entry level (pre-HST),,,,,,2219554.97
