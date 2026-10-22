@@ -117,7 +117,7 @@ outlet('T-8R', 'R/A 8R family rm LW 14x8', 'return', ['R-XD', 'R-M0', 'R-M', 'R-
 TOP2 = J2T - 0.05
 seg('D2-PL', 'F-2 supply plenum + coil', 'S', 'supply', 'plenum', 9.32, 11.67, 41.84, 43.6, L['FFL1R']+5.3, TOP2, src=True, axis='z')
 run('D2-C0', 'Supply trunk C 18x8 (from F-2)', 'S', 'supply', 18, 8, 4.88, 9.32, TOP2, 'x', 42.74)
-run('D2-C', 'Supply trunk C 18x8', 'S', 'supply', 18, 8, 27.88, 44.72, TOP2, 'y', 5.63)
+run('D2-C', 'Supply trunk C 18x8', 'S', 'supply', 18, 8, 27.88, 44.72, TOP2, 'y', 5.8)
 run('D2-A0', 'Supply trunk A 10x8 (off C)', 'S', 'supply', 10, 8, 1.55, 4.88, TOP2, 'x', 27.13)
 run('D2-A', 'Supply trunk A 10x8 (front, along S wall)', 'S', 'supply', 10, 8, 0.91, 27.55, TOP2, 'y', 1.96)
 run('D2-B0', 'Supply trunk B 12x8 (off C)', 'S', 'supply', 12, 8, 0.94, 6.38, TOP2, 'x', 45.22)
@@ -154,7 +154,7 @@ up('26', 5.04, 6.12, 55.34, 55.67, 'S/A 26 primary bedroom floor at 12\' slider'
 up('25', 1.24, 2.32, 55.34, 55.67, 'S/A 25 primary bedroom floor at 12\' slider', Bp)
 # F-2 returns
 seg('R2-XD', 'F-2 return drop 22x8 / 24x10', 'S', 'return', '24x10', 9.32, 11.67, 40.9, 41.84, L['FFL1R']+0.5, TOP2, axis='z', src=True)
-run('R2-Y', 'Return trunk Y 16x8', 'S', 'return', 16, 8, 29.0, 40.9, TOP2, 'y', 10.19)
+run('R2-Y', 'Return trunk Y 16x8', 'S', 'return', 16, 8, 29.0, 40.9, TOP2, 'y', 10.6)
 run('R2-Z', 'Return trunk Z 10x8', 'S', 'return', 10, 8, 13.96, 26.2, TOP2, 'y', 8.86)
 run('R2-Z2', 'Return Z→Y transition (45°, modelled as L)', 'S', 'return', 10, 8, 26.2, 29.43, TOP2, 'y', 8.86)
 run('R2-Z3', 'Return Z→Y transition', 'S', 'return', 10, 8, 8.45, 11.0, TOP2, 'x', 29.02)
@@ -166,8 +166,8 @@ term('T-5R', 'R/A 5R high-wall 14x8 - family rm / hall', 'S', 'return', 9.47, 9.
 vert('R-5Rv', 'R/A 5R stack 7" (family rm rear wall)', 'S', 'return', 7, 0, 9.3, 26.55, S0+7.0, TOP2, inwall='Family rm rear wall')
 outlet('T-5R', 'R/A 5R family rm HW', 'return', RZ[:4] + ['R-5Rv'], 'S')
 term('T-6R', 'R/A 6R high-wall 14x8 - bedroom 2', 'S', 'return', 7.7, 10.31, 44.27, 44.32, L['FFL1R']+6.6, L['FFL1R']+7.3)
-run('R-6Ra', 'R/A 6R run 14x8', 'S', 'return', 14, 8, 41.84, 44.5, TOP2, 'y', 9.0)
-vert('R-6Rv', 'R/A 6R stack 7" (bedroom 2 front wall)', 'S', 'return', 7, 0, 9.0, 44.1, L['FFL1R']+7.0, TOP2, inwall='Bedroom 2 front wall')
+run('R-6Ra', 'R/A 6R run 14x8', 'S', 'return', 14, 8, 41.84, 44.5, TOP2, 'y', 9.4)
+vert('R-6Rv', 'R/A 6R stack 7" (bedroom 2 front wall)', 'S', 'return', 7, 0, 9.4, 44.1, L['FFL1R']+7.0, TOP2, inwall='Bedroom 2 front wall')
 outlet('T-6R', 'R/A 6R bedroom 2 HW', 'return', ['R2-XD', 'R-6Ra', 'R-6Rv'], 'S')
 vert('R-1Rv', 'R/A 1R stack 7" down from 3rd floor (bedroom 3 / ensuite wall)', 'T', 'return', 7, 0, 8.55, 21.84, TOP2-0.3, T0+7.3, inwall='Bedroom 3 / ensuite E')
 term('T-1R', 'R/A 1R high-wall 14x8 - bedroom 3', 'T', 'return', 7.91, 9.16, 21.62, 21.67, T0+6.6, T0+7.3)
@@ -177,7 +177,7 @@ rnd('R-3Rh', 'R/A 3R tie into Z (7")', 'S', 'return', 7, 9.28, 9.75, TOP2-0.3, '
 term('T-3R', 'R/A 3R high-wall 14x8 - ensuite vanity wall', 'T', 'return', 9.5, 9.58, 25.61, 26.86, T0+6.6, T0+7.3)
 outlet('T-3R', 'R/A 3R ensuite HW (3rd)', 'return', RZ[:4] + ['R-3Rh', 'R-3Rv'], 'T')
 vert('R-2Rv', 'R/A 2R stack 7" (3rd floor hall)', 'T', 'return', 7, 0, 12.8, 34.65, TOP2-0.3, T0+7.3)
-rnd('R-2Rh', 'R/A 2R tie into Y (7")', 'S', 'return', 7, 10.19, 12.8, TOP2-0.3, 'x', 34.65)
+rnd('R-2Rh', 'R/A 2R tie into Y (7")', 'S', 'return', 7, 10.6, 12.8, TOP2-0.3, 'x', 34.65)
 term('T-2R', 'R/A 2R high-wall 14x8 - 3rd floor hall', 'T', 'return', 12.62, 12.66, 34.03, 35.28, T0+6.6, T0+7.3)
 outlet('T-2R', 'R/A 2R 3rd floor hall HW', 'return', ['R2-XD', 'R2-Y', 'R-2Rh', 'R-2Rv'], 'T')
 # ---------------- exhaust (fans drawn, routes NOT drawn)
@@ -191,6 +191,14 @@ OUT.append(dict(id='EQ-F1', name='Basement return grille (schedule says BAS R/A 
 # water heater vent (existing - for coordination)
 E.append(dict(id='EQ-HWTV', name='Ex. HWT vent 3"', cat='equip', shape='cyl', lvl='B', axis='z', d=3, mat='steel', x0=5.5, x1=5.75, y0=7.55, y1=7.8, z0=5.4, z1=J0T))
 
+# Decision Oct 22 (Raff): all F-2 runs drop to hang directly under the 3rd-floor joists / beams, boxed in the 2nd-floor ceiling
+_SB = [e for e in E if e['lvl'] == 'S' and e['cat'] in ('joist', 'beam')]
+for x in D:
+    if x['lvl'] == 'S' and x.get('axis') in ('x', 'y'):
+        bot = min([s['z0'] for s in _SB if s['x0'] < x['x1'] and s['x1'] > x['x0'] and s['y0'] < x['y1'] and s['y1'] > x['y0']] or [L['J2B']])
+        h = x['z1'] - x['z0']; x['z1'] = round(bot - 0.01, 3); x['z0'] = round(x['z1'] - h, 3); x['dropped'] = True
+    if x['id'] in ('R-4Rv', 'R-5Rv', 'R-6Rv'): x['z1'] = round(L['J2B'] - 0.3, 3); x['name'] = x['name'].replace(', through LVL5 line', '')
+    if x['id'] in ('R-1Rv', 'R-3Rv', 'R-2Rv'): x['z0'] = round(L['J2B'] - 0.7, 3)
 import re as _re
 _nm = {}
 for e in E:

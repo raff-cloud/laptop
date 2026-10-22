@@ -52,7 +52,9 @@ for d in ducts:
             if g <= 0.01: clashes.append(dict(a=d['id'], b=t['id'], an=d['name'], bn=t['name'], kind='HARD', vol=round(max(vol, 0.01), 3)))
 # main-floor ceiling must stay clear (two-system design)
 for d in ducts:
-    if d['lvl'] in ('G', 'S') and d['z1'] > L['J1B'] + 0.01 and d['z0'] < L['J1T'] - 0.01 and d.get('axis') != 't':
+    rear = (d['y0'] + d['y1']) / 2 >= 28
+    jb, jt = (L['J1BR'], L['J1TR']) if rear else (L['J1B'], L['J1T'])
+    if d['lvl'] in ('G', 'S') and d['z1'] > jb + 0.01 and d['z0'] < jt - 0.01 and d.get('axis') != 't':
         clashes.append(dict(a=d['id'], b='J1A-1', an=d['name'], bn='Main-floor ceiling (must stay duct-free)', kind='HARD', vol=0.01))
 # bulkheads: runs that cross joists
 bulk = []
@@ -62,11 +64,9 @@ for d in ducts:
     if Ln < 1.5: continue
     if d['lvl'] == 'B' and d['z1'] <= L['J0B'] + 0.01:
         bulk.append(dict(id=d['id'], len_ft=round(Ln, 1), under_ft=round(d['z0'], 2), lvl='B', note='below basement joists'))
-    if d['lvl'] == 'S':
-        crosses = [c for c in clashes if c['a'] == d['id'] and by.get(c['b'], {}).get('cat') in ('joist', 'beam') and c['kind'] == 'HARD']
-        if crosses:
-            depth = d['z1'] - d['z0']
-            bulk.append(dict(id=d['id'], len_ft=round(Ln, 1), under_ft=round(L['J2B'] - depth - 0.1 - L['FFL1'], 2), lvl='S', note=f'crosses {len(crosses)} joists/beams as drawn - needs a 2nd-floor ceiling bulkhead or re-route'))
+    if d['lvl'] == 'S' and d.get('dropped'):
+        fl = L['FFL1R'] if (d['y0'] + d['y1']) / 2 >= 28 else L['FFL1']
+        bulk.append(dict(id=d['id'], len_ft=round(Ln, 1), under_ft=round(d['z0'] - 0.1 - fl, 2), lvl='S', note=f"hung under the 3rd-floor joists, boxed - {int(d['z0']-0.1-fl)}'-{round(((d['z0']-0.1-fl)%1)*12)}\" clear (decision Oct 22)"))
 # in-wall stacks vs wall cavity
 prot = []
 for d in ducts:

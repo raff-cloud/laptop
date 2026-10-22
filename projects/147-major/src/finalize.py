@@ -5,8 +5,8 @@ M['clashes'].append(dict(a='S-9v',b=fd['id'],an=by['S-9v']['name'],bn='Old rear-
 J2B=L['J2B']; n=0
 for b in M['bulkheads']:
     if b['lvl']!='S': continue
-    d=by[b['id']]; n+=1; depth=d['z1']-d['z0']; pad=2/12
-    E.append(dict(id=f'BH-{n}',name=f'Proposed bulkhead - {d["name"].split(" (")[0]}',cat='bulkhead',shape='box',lvl='S',x0=round(d['x0']-pad,3),x1=round(d['x1']+pad,3),y0=round(d['y0']-pad,3),y1=round(d['y1']+pad,3),z0=round(J2B-depth-0.1,3),z1=round(J2B,3),mat='bulkhead',clear=round(J2B-depth-0.1-(L['FFL1R'] if (d['y0']+d['y1'])/2>=28 else L['FFL1']),2)))
+    d=by[b['id']]; n+=1; depth=d['z1']-d['z0']; pad=2/12; fl=(L['FFL1R'] if (d['y0']+d['y1'])/2>=28 else L['FFL1'])
+    E.append(dict(id=f'BH-{n}',name=f'Bulkhead (Oct 22) - {d["name"].split(" (")[0]}',cat='bulkhead',shape='box',lvl='S',x0=round(d['x0']-pad,3),x1=round(d['x1']+pad,3),y0=round(d['y0']-pad,3),y1=round(d['y1']+pad,3),z0=round(d['z0']-0.1,3),z1=round(J2B,3),mat='bulkhead',clear=round(d['z0']-0.1-fl,2)))
 def fi(v): 
     f=int(v); i=round((v-f)*12*4)/4
     if i>=12: f+=1;i-=12
