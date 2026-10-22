@@ -8,8 +8,9 @@ L = dict(SLAB=0.0, FFL0=el(110.52), FFL1=el(113.85), FFL2=el(116.90), TOP=el(119
 # floor build-ups (3/4 subfloor + 3/4 finish = 1.5")
 L['J0T'] = round(L['FFL0'] - 0.125, 3); L['J0B'] = round(L['J0T'] - 11.25/12, 3)          # ex. 2x12 under main floor
 L['J1T'] = round(L['FFL1'] - 0.125, 3); L['J1B'] = round(L['J1T'] - 11.25/12, 3)          # ex. 2x12 under 2nd floor
+L['FFL1R'] = round(L['FFL1'] - 16/12, 3); L['J1TR'] = round(L['FFL1R'] - 0.125, 3); L['J1BR'] = round(L['J1TR'] - 11.25/12, 3)
 L['J2T'] = round(L['FFL2'] - 0.125, 3); L['J2B'] = round(L['J2T'] - 9.5/12, 3)            # 9-1/2" TJI under 3rd floor
-L['CEIL0'] = round(L['J1B'] - 0.05, 3); L['CEIL1'] = round(L['J2B'] - 0.05, 3); L['CEIL2'] = round(L['TOP'], 3)
+L['CEIL0'] = round(L['J1B'] - 0.05, 3); L['CEIL0R'] = round(L['J1BR'] - 0.05, 3); L['CEIL1'] = round(L['J2B'] - 0.05, 3); L['CEIL2'] = round(L['TOP'], 3)
 E = []
 def box(id, name, cat, lvl, x0, x1, y0, y1, z0, z1, mat, **kw):
     d = dict(id=id, name=name, cat=cat, shape='box', lvl=lvl, x0=round(min(x0,x1),3), x1=round(max(x0,x1),3), y0=round(min(y0,y1),3), y1=round(max(y0,y1),3), z0=round(z0,3), z1=round(z1,3), mat=mat)
@@ -58,7 +59,8 @@ WALLS = {
   ('Chimney breast', 0.85, 1.9, 4.9, 9.8, 'brick', False),
   ('Pantry/storage wall', 2.03, 7.24, 44.27, 44.52, 'drywall', False),
   ('Pantry back', 5.05, 7.24, 43.68, 43.9, 'drywall', False),
-  ('Addition S wall (5/8 X, <1.2 m to lot line)', 0.12, 0.69, 43.68, 56.55, 'siding', True),
+  ('Addition S wall (5/8 X, <1.2 m to lot line)', 0.12, 0.69, 44.27, 56.55, 'siding', True),
+  ('Addition wall facing notch', 0.12, 4.21, 43.68, 44.27, 'siding', True),
   ('Powder wall N', 0.69, 1.71, 50.15, 50.49, 'drywall', False),
   ('Powder wall N2', 2.03, 4.69, 50.15, 50.49, 'drywall', False),
   ('Powder/family wall', 4.69, 5.03, 48.02, 55.96, 'drywall', False),
@@ -66,9 +68,11 @@ WALLS = {
   ('Rear wall S', 0.12, 5.03, 55.96, 56.48, 'siding', True),
  ],
  'S': [
-  ('Ex. brick - south', 0.0, 0.85, -0.5, 26.4, 'brick', True),
-  ('New frame - south (over side yard)', 0.0, 0.45, 26.4, 44.5, 'siding', True),
-  ('Addition S wall', 0.12, 0.69, 44.5, 56.4, 'siding', True),
+  ('Ex. brick - south', 0.0, 0.98, -0.5, 28.04, 'brick', True),
+  ('Jog wall at side-yard notch', 0.0, 4.2, 27.97, 28.9, 'siding', True),
+  ('South wall at side-yard notch (over kitchen wing)', 4.18, 5.0, 28.9, 43.67, 'siding', True),
+  ('Addition wall facing notch', 0.12, 4.18, 43.67, 44.25, 'siding', True),
+  ('Addition S wall', 0.12, 0.69, 44.25, 56.4, 'siding', True),
   ('Demising wall (party)', 16.44, 16.87, -0.5, 44.2, 'drywall', True),
   ('New demising wall (party, addition)', 16.2, 16.87, 44.2, 56.4, 'drywall', True),
   ('Front wall', 0.0, 16.67, -0.6, 0.15, 'brick', True),
@@ -87,15 +91,16 @@ WALLS = {
  ],
  'T': [
   ('40"H knee wall (front)', 0.0, 16.44, 6.67, 7.16, 'drywall', True),
-  ('South wall (existing)', 0.0, 0.5, 7.16, 21.67, 'siding', True),
-  ('South wall (addition)', 0.12, 0.69, 21.67, 56.4, 'siding', True),
+  ('South wall (existing)', 0.0, 0.5, 7.16, 28.3, 'siding', True),
+  ('Addition S wall', 0.12, 0.69, 44.25, 56.4, 'siding', True),
+  ('Addition wall facing notch', 0.12, 4.18, 43.67, 44.25, 'siding', True),
   ('Ex./new demising wall (party)', 16.44, 16.87, 6.5, 21.67, 'drywall', True),
   ('New demising wall (party, addition)', 16.2, 16.87, 21.67, 56.4, 'drywall', True),
   ('Bedroom 3 / ensuite', 0.5, 4.94, 21.67, 22.01, 'drywall', False),
   ('Bedroom 3 / ensuite E', 7.11, 10.19, 21.67, 22.01, 'drywall', False),
   ('Vanity wall (ensuite / hall)', 9.58, 9.92, 22.01, 31.13, 'drywall', False),
-  ('Ensuite wall S', 4.18, 4.75, 28.21, 44.25, 'drywall', False),
-  ('Tub alcove wall', 0.5, 4.75, 28.21, 28.3, 'drywall', False),
+  ('South wall at side-yard notch', 4.18, 4.75, 28.9, 43.67, 'siding', True),
+  ('Jog wall at side-yard notch', 0.0, 4.75, 28.21, 28.9, 'siding', True),
   ('Hall wall', 9.58, 13.37, 30.81, 31.13, 'drywall', False),
   ('Shower / WIC wall', 4.75, 12.62, 37.26, 37.5, 'drywall', False),
   ('WIC rear wall', 0.71, 12.92, 43.91, 44.25, 'drywall', False),
@@ -115,21 +120,31 @@ WIN = [
  ('WN-G5', 'Rear 34x80 unit (storage)', 'G', 'x', 56.2, 1.4, 4.2, 0.0, 6.67),
  ('WN-G6', 'South window (dining, 12.67 sf)', 'G', 'y', 0.4, 21.2, 23.6, 3.0, 7.0),
  ('WN-S1', 'Rear 144x78 window', 'S', 'x', 56.2, 2.0, 14.0, 1.5, 8.0),
- ('WN-S2', 'South window (bath, 10.6 sf)', 'S', 'y', 0.2, 30.0, 32.4, 3.5, 7.5),
+ ('WN-S2', 'Bath window on notch wall (10.6 sf)', 'S', 'y', 4.6, 30.85, 33.18, 3.5, 7.5),
+ ('WN-T3', 'Ensuite window on notch wall', 'T', 'y', 4.46, 30.08, 32.92, 3.5, 7.5),
  ('WN-S3', 'Front windows (primary)', 'S', 'x', -0.2, 3.0, 13.0, 2.5, 7.5),
  ('DR-T1', 'Rear 12\' sliding door 144x84 to balcony', 'T', 'x', 56.2, 2.3, 14.3, 0.0, 7.0),
  ('WN-T1', 'South 120x60 window (fire shutter)', 'T', 'y', 0.2, 46.0, 56.0 - 0.0, 2.5, 7.5),
  ('WN-T2', 'South 34x64 window (ensuite)', 'T', 'y', 0.2, 23.4, 26.2, 2.4, 7.7),
 ]
 FFL = {'B': 0.0, 'G': L['FFL0'], 'S': L['FFL1'], 'T': L['FFL2']}
+REAR = 28.0   # 2nd floor steps down 16" behind this line (jog / kitchen wing)
+def ffl(lv, y0): return L['FFL1R'] if (lv == 'S' and y0 >= REAR - 0.05) else FFL[lv]
+def gtop(y0): return L['J1BR'] if y0 >= REAR - 0.05 else L['J1B']
 def wall_boxes():
     n = 0
     for lv, ws in WALLS.items():
-        z0, z1 = FFL[lv], STRUCT_TOP[lv] if lv != 'T' else L['TOP']
-        if lv == 'B': z1 = L['J0B']
-        if lv == 'G': z1 = L['J1B']
-        if lv == 'S': z1 = L['J2B']
-        for (nm, x0, x1, y0, y1, mat, ext) in ws:
+        ws2 = []
+        for w in ws:   # split walls that run across the 2nd-floor step line
+            nm, x0, x1, y0, y1, mat, ext = w
+            if lv in ('G', 'S') and y0 < REAR - 0.1 and y1 > REAR + 0.1 and (y1 - y0) > (x1 - x0):
+                ws2 += [(nm, x0, x1, y0, REAR, mat, ext), (nm, x0, x1, REAR, y1, mat, ext)]
+            else: ws2.append(w)
+        for (nm, x0, x1, y0, y1, mat, ext) in ws2:
+            z0, z1 = ffl(lv, y0), STRUCT_TOP[lv] if lv != 'T' else L['TOP']
+            if lv == 'B': z1 = L['J0B']
+            if lv == 'G': z1 = gtop(y0)
+            if lv == 'S': z1 = L['J2B']
             n += 1
             wid = f'W{lv}{n}'
             th = min(x1-x0, y1-y0)
@@ -164,7 +179,7 @@ for i, (x0, x1, y0, y1) in enumerate([(0.8, 2.0, -2.0, 0.0), (1.6, 9.4, -3.75, -
     for lv in ('B',):
         box(f'BAYB{i}', 'Ex. bay foundation', 'wall', 'B', x0, x1, y0, y1, 0, L['J0B'], 'parge')
 for (wid_, nm, lv, ori, c, a, b, s, h) in WIN:
-    z = FFL[lv]
+    z = ffl(lv, c if ori == 'x' else a)
     if ori == 'x':
         box(wid_, nm, 'window' if not wid_.startswith('DR') else 'door', lv, a, b, c-0.08, c+0.08, z+s, z+h, 'glass', glaz='clear', ori='x')
     else:
@@ -181,8 +196,12 @@ box('SLAB', 'Ex. basement slab', 'finish', 'B', 0.0, 16.67, -3.7, 56.5, -0.3, 0.
 box('F-G1', 'Red oak 3/4x2-1/4 plain cut (ML-084), stained on site', 'finish', 'G', 0.85, 16.0, -3.5, 43.68, L['FFL0']-0.06, L['FFL0'], 'oak')
 box('F-G2', 'Red oak - family room', 'finish', 'G', 5.03, 16.0, 44.52, 55.96, L['FFL0']-0.06, L['FFL0'], 'oak')
 box('F-G3', 'Powder floor - Ciot Nuances chevron (ML-030)', 'finish', 'G', 0.69, 4.69, 50.49, 55.96, L['FFL0']-0.06, L['FFL0'], 'tile')
-box('F-S1', 'Red oak - 2nd floor (family room raised area ML-085)', 'finish', 'S', 0.45, 16.0, 0.15, 55.97, L['FFL1']-0.06, L['FFL1'], 'oak')
-box('F-T1', 'Red oak - 3rd floor', 'finish', 'T', 0.45, 16.0, 6.9, 55.97, L['FFL2']-0.06, L['FFL2'], 'oak')
+box('F-S1', 'Red oak - 2nd floor front (upper level, raised family rm ML-085)', 'finish', 'S', 0.98, 16.44, 0.15, 27.97, L['FFL1']-0.06, L['FFL1'], 'oak')
+box('F-S1b', 'Red oak - 2nd floor rear (16" lower)', 'finish', 'S', 5.0, 16.44, 27.97, 44.27, L['FFL1R']-0.06, L['FFL1R'], 'oak')
+box('F-S1c', 'Red oak - bedroom 2 (16" lower)', 'finish', 'S', 0.69, 16.2, 44.27, 55.97, L['FFL1R']-0.06, L['FFL1R'], 'oak')
+box('F-T1', 'Red oak - 3rd floor front', 'finish', 'T', 0.5, 16.44, 7.16, 28.3, L['FFL2']-0.06, L['FFL2'], 'oak')
+box('F-T1b', 'Red oak - 3rd floor (over kitchen wing)', 'finish', 'T', 4.75, 16.44, 28.3, 44.25, L['FFL2']-0.06, L['FFL2'], 'oak')
+box('F-T1c', 'Red oak - primary bedroom', 'finish', 'T', 0.71, 16.2, 44.25, 55.97, L['FFL2']-0.06, L['FFL2'], 'oak')
 box('F-T2', 'Ensuite floor - Ciot Boost Stone 24x24 + electric heat (ML-049/070)', 'finish', 'T', 0.5, 9.58, 22.01, 28.21, L['FFL2']-0.05, L['FFL2']+0.01, 'tile')
 box('F-T3', 'Ensuite floor (vanity/WC)', 'finish', 'T', 4.75, 9.58, 28.21, 37.26, L['FFL2']-0.05, L['FFL2']+0.01, 'tile')
 box('F-T4', 'Shower feature wall - Kyushu Verde 2x10 (ML-047)', 'finish', 'T', 5.08, 9.51, 37.1, 37.26, L['FFL2'], L['FFL2']+7.5, 'bluetile')
@@ -206,11 +225,12 @@ joists('J0B', 'Ex. 2x12 @16" (main floor, kitchen wing)', 'B', L['J0T'], 11.25/1
 joists('J0C', 'Ex. 2x12 @16" (family room, to remain)', 'B', L['J0T'], 11.25/12, 'x', 16, 5.1, 16.25, 44.34, 55.6)
 joists('J0D', 'New 2x12 @16" (addition strip)', 'B', L['J0T'], 11.25/12, 'x', 16, 0.96, 4.25, 44.5, 55.72)
 # 2nd floor framing
-joists('J1A', 'Ex. 2x12 @16" (2nd floor)', 'G', L['J1T'], 11.25/12, 'x', 16, 0.85, 16.0, 0.62, 43.5)
-joists('J1B', 'New 11-7/8" TJI 230 @16" (2nd floor over family rm)', 'G', L['J1T'], 11.875/12, 'x', 16, 0.45, 16.0, 43.97, 55.9, 'lvl')
-box('BM-G1', '2-1 3/4x11 7/8 2.0E Microlam LVL (FL)', 'beam', 'G', 5.05, 16.0, 43.68, 43.97, L['J1T']-11.875/12, L['J1T'], 'lvl')
-box('BM-G2', 'LVL 3 (DRP) over 10\' slider', 'beam', 'G', 5.0, 16.0, 55.6, 55.9, L['J1B']-0.5, L['J1T'], 'lvl')
-box('BM-G3', 'WB2 (DRP) rear storage', 'beam', 'G', 0.2, 5.0, 55.6, 55.9, L['J1B']-0.5, L['J1T'], 'lvl')
+joists('J1A', 'Ex. 2x12 @16" (2nd floor, front - upper level)', 'G', L['J1T'], 11.25/12, 'x', 16, 0.85, 16.44, 0.62, 27.95)
+joists('J1C', 'Ex. 2x12 @16" (2nd floor over kitchen wing - 16" lower)', 'G', L['J1TR'], 11.25/12, 'x', 16, 5.0, 16.44, 28.3, 43.5)
+joists('J1B', 'New 11-7/8" TJI 230 @16" (2nd floor over family rm)', 'G', L['J1TR'], 11.875/12, 'x', 16, 0.69, 16.2, 43.97, 55.9, 'lvl')
+box('BM-G1', '2-1 3/4x11 7/8 2.0E Microlam LVL (FL)', 'beam', 'G', 5.05, 16.0, 43.68, 43.97, L['J1TR']-11.875/12, L['J1TR'], 'lvl')
+box('BM-G2', 'LVL 3 (DRP) over 10\' slider', 'beam', 'G', 5.0, 16.0, 55.6, 55.9, L['J1BR']-0.5, L['J1TR'], 'lvl')
+box('BM-G3', 'WB2 (DRP) rear storage', 'beam', 'G', 0.2, 5.0, 55.6, 55.9, L['J1BR']-0.5, L['J1TR'], 'lvl')
 # 3rd floor framing (2nd floor ceiling) - permit A8 labels
 J2T = L['J2T']
 joists('J2A', 'New 9-1/2" TJI 360 @12" (3rd floor, front)', 'S', J2T, 9.5/12, 'x', 12, 0.85, 16.0, 0.15, 12.95, 'lvl')
@@ -218,15 +238,19 @@ box('BM-S1', 'New LVL5 (FL) - closet line', 'beam', 'S', 0.85, 16.0, 12.95, 13.2
 joists('J2B', 'Ex. 2x12 @16" hung off new header (family rm)', 'S', J2T, 11.25/12, 'x', 16, 0.85, 12.9, 13.25, 26.4)
 box('BM-S2', 'New LVL5 (FL) - stair side', 'beam', 'S', 12.9, 13.2, 13.25, 26.6, J2T-11.25/12, J2T, 'lvl')
 box('BM-S3', 'New LVL5 (FL) - stair head', 'beam', 'S', 11.0, 16.0, 26.4, 26.7, J2T-11.875/12, J2T, 'lvl')
-joists('J2C', 'New 11-7/8" TJI 210 @16" (3rd floor mid)', 'S', J2T, 11.875/12, 'x', 16, 0.45, 13.2, 26.7, 33.0, 'lvl')
-joists('J2D', 'New 9-1/2" TJI 230 @16" (3rd floor)', 'S', J2T, 9.5/12, 'x', 16, 0.45, 16.0, 33.0, 46.3, 'lvl')
+joists('J2C', 'New 11-7/8" TJI 210 @16" (3rd floor mid)', 'S', J2T, 11.875/12, 'x', 16, 0.98, 13.2, 26.7, 28.0, 'lvl')
+joists('J2C2', 'New 11-7/8" TJI 210 @16" (3rd floor mid)', 'S', J2T, 11.875/12, 'x', 16, 5.0, 13.2, 28.0, 33.0, 'lvl')
+joists('J2D', 'New 9-1/2" TJI 230 @16" (3rd floor)', 'S', J2T, 9.5/12, 'x', 16, 5.0, 16.2, 33.0, 43.67, 'lvl')
+joists('J2D2', 'New 9-1/2" TJI 230 @16" (3rd floor)', 'S', J2T, 9.5/12, 'x', 16, 0.69, 16.2, 43.67, 46.3, 'lvl')
 box('BM-S4', 'New LVL4 (FL)', 'beam', 'S', 0.45, 16.0, 46.3, 46.6, J2T-9.5/12, J2T, 'lvl')
 joists('J2E', 'CANT. 9-1/2" TJI 230 @16" (bedroom 2 ceiling / balcony)', 'S', J2T, 9.5/12, 'y', 16, 46.6, 60.4, 1.75, 14.5, 'lvl')
 box('BM-S5', 'LVL 1 (CANT) - south', 'beam', 'S', 1.2, 1.5, 46.6, 60.4, J2T-9.5/12, J2T, 'lvl')
 box('BM-S6', 'LVL 1 (CANT) - north', 'beam', 'S', 14.6, 14.9, 46.6, 60.4, J2T-9.5/12, J2T, 'lvl')
-box('BM-S7', 'WB1 (DRP) - south wall over kitchen wing', 'beam', 'S', 0.5, 1.0, 26.6, 33.5, J2T-9.5/12-0.6, J2T-9.5/12, 'lvl')
+box('BM-S7', 'WB1 (DRP) - notch wall over kitchen wing', 'beam', 'S', 4.2, 4.7, 28.3, 33.5, J2T-9.5/12-0.6, J2T-9.5/12, 'lvl')
 # roof
-box('RF-1', 'Flat roof: membrane / 9-1/2" eng. roof joists @16" / R31 spray foam', 'roof', 'R', -0.2, 16.87, 6.3, 56.6, L['TOP'], L['ROOF']+0.15, 'membrane')
+box('RF-1', 'Flat roof: membrane / 9-1/2" eng. roof joists @16" / R31 spray foam', 'roof', 'R', -0.2, 16.87, 6.3, 28.9, L['TOP'], L['ROOF']+0.15, 'membrane')
+box('RF-1b', 'Flat roof (over kitchen wing)', 'roof', 'R', 4.0, 16.87, 28.9, 43.67, L['TOP'], L['ROOF']+0.15, 'membrane')
+box('RF-1c', 'Flat roof (addition)', 'roof', 'R', -0.1, 16.87, 43.67, 56.6, L['TOP'], L['ROOF']+0.15, 'membrane')
 box('RF-2', 'Ex. front roof (to remain)', 'roof', 'R', -0.3, 16.9, -0.8, 6.5, L['FFL2'], L['FFL2']+4.2, 'shingle')
 box('RF-3', 'Bay roof', 'roof', 'R', 0.6, 11.0, -4.0, -0.2, L['FFL1']-0.6, L['FFL1']-0.2, 'shingle')
 box('BAL-1', '3rd floor balcony deck (cantilever)', 'site', 'R', 1.3, 14.9, 56.5, 60.5, L['FFL2']-0.9, L['FFL2']-0.1, 'deck')
@@ -241,7 +265,8 @@ def stair(id, name, lvl, x0, x1, y0, y1, zb, zt, n, rising='+y'):
         else: ya, yb = y1 - (i+1)*run, y1 - i*run
         box(f'{id}-{i}', name, 'stair', lvl, x0, x1, ya, yb, zb + i*rise, zb + (i+1)*rise, 'oakstair')
 stair('ST-B', 'Ex. basement stair 11R (up to rear)', 'B', 13.65, 16.25, 19.3, 28.3, 0, L['FFL0'], 11, '+y')
-stair('ST-G', 'Ex. main stair 17R (up to rear)', 'G', 13.25, 16.0, 16.4, 28.3, L['FFL0'], L['FFL1'], 17, '+y')
+stair('ST-G', 'Ex. main stair 17R (up to rear, lands on lower rear level)', 'G', 13.25, 16.0, 16.4, 28.3, L['FFL0'], L['FFL1R'], 17, '+y')
+stair('ST-S2', '2R step up to front 2nd-floor level (16")', 'S', 10.9, 13.25, 27.97, 28.95, L['FFL1R'], L['FFL1'], 2, '-y')
 stair('ST-S', 'New stair over ex. stair 16R (up to rear, per A8/A9 plans)', 'S', 13.3, 16.0, 15.0, 28.3, L['FFL1'], L['FFL2'], 16, '+y')
 stair('ST-X', 'Ex. side basement walkout 10R', 'B', 0.4, 3.4, 29.6, 35.4, 0, L['GRADE'], 10, '+y')
 
@@ -260,8 +285,8 @@ box('CB-K-IS', 'Island 3\'-0" x 7\'-6" (permit) - walnut + breakfast bar', 'cabi
 box('CB-K-IT', 'Island quartz top', 'counter', 'G', 10.25, 13.38, 32.15, 39.78, G0+34.5/12, G0+36/12, 'quartz')
 box('CB-P-VN', 'Powder vanity - Teodor Malibu Slim 30" walnut (ML-029)', 'cabinet', 'G', 0.69, 2.4, 50.49, 52.99, G0, G0+2.75, 'walnut')
 box('FX-P-WC', 'Powder WC - Kohler Spacity (ML-034)', 'fixture', 'G', 3.09, 4.53, 54.0, 55.9, G0, G0+2.4, 'porcelain')
-box('FX-L-W', 'Washer', 'fixture', 'S', 4.45, 6.6, 37.5, 39.9, L['FFL1'], L['FFL1']+3.2, 'appliance')
-box('FX-L-D', 'Dryer', 'fixture', 'S', 6.6, 8.75, 37.5, 39.9, L['FFL1'], L['FFL1']+3.2, 'appliance')
+box('FX-L-W', 'Washer', 'fixture', 'S', 5.05, 7.2, 37.5, 39.9, L['FFL1R'], L['FFL1R']+3.2, 'appliance')
+box('FX-L-D', 'Dryer', 'fixture', 'S', 7.2, 9.35, 37.5, 39.9, L['FFL1R'], L['FFL1R']+3.2, 'appliance')
 T0 = L['FFL2']
 box('CB-E-VN', 'Ensuite vanity - Teodor Asher 72" double, walnut (ML-046)', 'cabinet', 'T', 7.75, 9.58, 23.2, 29.2, T0, T0+2.85, 'walnut')
 box('FX-E-M1', 'Mirror - GEF Curl 24" arch (ML-075)', 'fixture', 'T', 9.45, 9.55, 23.9, 25.9, T0+3.6, T0+6.6, 'steel')
@@ -277,7 +302,7 @@ box('EQ-F1', 'F-1 Lennox ML196UH070XE36B, 63,900 Btu/h out, 928 cfm + coil (ML14
 box('EQ-HWT', 'Ex. hot water tank (permit A6)', 'equip', 'B', 4.75, 6.5, 6.8, 8.55, 0, 5.4, 'equipw')
 box('EQ-HRV1', 'HRV-1 (VanEE, model not stated)', 'equip', 'B', 3.91, 5.68, 12.55, 13.9, 6.4, 7.9, 'equipw')
 box('EQ-EXF', 'Ex. H.E. furnace (permit A6 - to be replaced?)', 'equip', 'B', 1.23, 4.23, 7.63, 10.24, 0, 0.05, 'equipw')
-S0 = L['FFL1']
+S0 = L['FFL1R']
 box('EQ-F2', 'F-2 Lennox ML196UH030XE36B, 29,000 Btu/h out, 735 cfm + coil (ML14KP1 2.0 ton HP)', 'equip', 'S', 9.32, 11.67, 41.84, 43.6, S0, S0+5.3, 'equip')
 box('EQ-HRV2', 'HRV-2 (VanEE, model not stated)', 'equip', 'S', 10.85, 12.43, 40.6, 41.62, S0+6.4, S0+7.9, 'equipw')
 

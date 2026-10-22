@@ -19,7 +19,7 @@ MK = [
  ('B', bb(['S-9v']), 'Q4', RED), ('G', bb(['T-9']), 'Q4', RED), ('B', bb(['R-M3', 'R-M5', 'R-8Rv']), 'Q4', RED), ('G', bb(['T-8R']), 'Q4', RED),
  ('T', bb(['T-3R', 'R-3Rv']), 'Q5', RED),
  ('T', bb(['R-1Rv']), 'Q6', AMB), ('T', bb(['R-2Rv']), 'Q6', AMB), ('S', bb(['R-5Rv']), 'Q6', AMB), ('S', bb(['R-6Rv']), 'Q6', AMB), ('G', bb(['R-9Rv']), 'Q6', AMB), ('B', bb(['S-24v']), 'Q6', AMB),
- ('S', bb(['R-4Rv', 'T-4R']), 'Q7', RED),
+ ('S', bb(['R-4Rv', 'T-4R']), 'Q7', RED), ('S', (10.8, 13.4, 27.8, 29.1), 'Q11', BLU),
  ('G', (4.9, 7.2, 28.2, 43.8), 'Q8', RED), ('G', (13.3, 16.3, 31.5, 40.5), 'Q8', AMB),
  ('G', (4.0, 7.2, 37.3, 40.2), 'Q9', RED),
  ('B', bb(['D-F0', 'EQ-HWT', 'D-PL1']), 'Q10', RED),
@@ -28,7 +28,7 @@ MK = [
  ('G', bb(['T-16']), 'S1', AMB), ('G', bb(['T-12']), 'S2', AMB), ('B', bb(['D-E']), 'S3', AMB),
 ]
 for f in ('X-B1',): pass
-TITLE = {q['title'].split(' · ')[0]: q['title'].split(' · ', 1)[1] for q in Q['questions']}
+TITLE = {q['title'].split(' · ')[0]: q['title'].split(' · ', 1)[1] for q in Q['questions'] if q['n'] > 0}
 TITLE.update({'S1': 'Supply 16 boot tight to the bay corner', 'S2': 'Supply 12 kick register under the pantry', 'S3': 'Trunk E ends ½" off the old rear wall'})
 rd = PdfReader(SRC); wr = PdfWriter()
 # cover sheet
@@ -39,7 +39,7 @@ c.drawString(54, 1128, 'HVAC Designs LO# 113963 (HVA 26 167838) vs permit 26 167
 c.drawString(54, 1112, 'Two systems: F-1 basement (basement + main floor from below) · F-2 2nd-floor mech room (2nd + 3rd floors from the 3rd-floor joist space).')
 y = 1080
 c.setFont('Helvetica-Bold', 12); c.drawString(54, y, 'Questions / open items'); y -= 20
-for q in Q['questions']:
+for q in [x for x in Q['questions'] if x['n'] > 0]:
     c.setFillColor(RED); c.setFont('Helvetica-Bold', 10); c.drawString(54, y, q['title'].split(' · ')[0]); c.setFillColor(Color(0, 0, 0))
     c.setFont('Helvetica-Bold', 10); c.drawString(92, y, q['title'].split(' · ', 1)[1][:95]); y -= 13
     c.setFont('Helvetica', 9)
@@ -48,6 +48,14 @@ for q in Q['questions']:
         if c.stringWidth(line + ' ' + w, 'Helvetica', 9) > 640: c.drawString(92, y, line); y -= 11; line = w
         else: line = (line + ' ' + w).strip()
     c.drawString(92, y, line); y -= 17
+y -= 4; c.setFont('Helvetica-Bold', 12); c.drawString(54, y, 'Resolved with Raff'); y -= 16
+for q in [x for x in Q['questions'] if x['n'] == 0]:
+    c.setFont('Helvetica-Bold', 9); c.drawString(66, y, f"{q['date']} - {q['title']}"); y -= 11; c.setFont('Helvetica', 8.5)
+    words = q['answer'].split(); line = ''
+    for w in words:
+        if c.stringWidth(line + ' ' + w, 'Helvetica', 8.5) > 640: c.drawString(78, y, line); y -= 10; line = w
+        else: line = (line + ' ' + w).strip()
+    c.drawString(78, y, line); y -= 14
 y -= 6; c.setFont('Helvetica-Bold', 12); c.drawString(54, y, 'Not connected (no route drawn)'); y -= 16; c.setFont('Helvetica', 9)
 for r in M['conn']:
     if not r['ok']: c.drawString(66, y, f"• {r['name']}"); y -= 12
