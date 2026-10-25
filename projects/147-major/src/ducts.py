@@ -117,9 +117,11 @@ outlet('T-8R', 'R/A 8R family rm LW 14x8', 'return', ['R-XD', 'R-M0', 'R-M', 'R-
 TOP2 = J2T - 0.05
 seg('D2-PL', 'F-2 supply plenum + coil', 'S', 'supply', 'plenum', 9.32, 11.67, 41.84, 43.6, L['FFL1R']+5.3, TOP2, src=True, axis='z')
 run('D2-C0', 'Supply trunk C 18x8 (from F-2)', 'S', 'supply', 18, 8, 4.88, 9.32, TOP2, 'x', 42.74)
-run('D2-C', 'Supply trunk C 18x8', 'S', 'supply', 18, 8, 27.88, 44.72, TOP2, 'y', 5.8)
+run('D2-C', 'Supply trunk C 18x8', 'S', 'supply', 18, 8, 27.88, 43.67, TOP2, 'y', 5.8)
+run('D2-C9', 'Supply trunk C 18x8 (into bedroom 2 ceiling)', 'S', 'supply', 18, 8, 43.67, 44.72, TOP2, 'y', 5.8)
 run('D2-A0', 'Supply trunk A 10x8 (off C)', 'S', 'supply', 10, 8, 1.55, 4.88, TOP2, 'x', 27.13)
-run('D2-A', 'Supply trunk A 10x8 (front, along S wall)', 'S', 'supply', 10, 8, 0.91, 27.55, TOP2, 'y', 1.96)
+run('D2-AF', 'Supply trunk A 10x8 (front - primary bedroom)', 'S', 'supply', 10, 8, 0.91, 13.25, TOP2, 'y', 1.96)
+run('D2-A', 'Supply trunk A 10x8 (along S wall)', 'S', 'supply', 10, 8, 13.25, 27.55, TOP2, 'y', 1.96)
 run('D2-B0', 'Supply trunk B 12x8 (off C)', 'S', 'supply', 12, 8, 0.94, 6.38, TOP2, 'x', 45.22)
 run('D2-B', 'Supply trunk B 12x8 (rear, along S wall)', 'S', 'supply', 12, 8, 44.72, 55.73, TOP2, 'y', 1.44)
 SB = J2T - 0.33
@@ -129,13 +131,13 @@ def up(oid, x0, x1, y0, y1, label, path, lvl='T'):
 def ceil(oid, x0, x1, y0, y1, label, path):
     term(f'T-{oid}', label, 'S', 'supply', x0, x1, y0, y1, L['CEIL1']-0.06, SB)
     outlet(f'T-{oid}', label, 'supply', path, 'S')
-A = ['D2-PL', 'D2-C0', 'D2-C', 'D2-A0', 'D2-A']; Bp = ['D2-PL', 'D2-C0', 'D2-C', 'D2-B0', 'D2-B']; C = ['D2-PL', 'D2-C0', 'D2-C']
+A = ['D2-PL', 'D2-C0', 'D2-C', 'D2-A0', 'D2-A', 'D2-AF']; Bp = ['D2-PL', 'D2-C0', 'D2-C', 'D2-C9', 'D2-B0', 'D2-B']; C = ['D2-PL', 'D2-C0', 'D2-C']
 rnd('S-35', 'Supply 35 branch 6"', 'S', 'supply', 6, 2.38, 5.31, SB, 'x', 1.02)
 ceil('35', 5.29, 6.37, 0.85, 1.18, 'S/A 35 primary bedroom ceiling (front)', A + ['S-35'])
 rnd('S-36', 'Supply 36 branch 6"', 'S', 'supply', 6, 2.38, 13.36, SB, 'x', 1.42)
 ceil('36', 13.32, 14.40, 1.26, 1.59, 'S/A 36 primary bedroom ceiling (front)', A + ['S-36'])
-up('32', 0.87, 1.20, 13.90, 14.98, 'S/A 32 bedroom 3 floor (3rd)', A)
-up('31', 0.87, 1.20, 18.78, 19.87, 'S/A 31 bedroom 3 floor (3rd)', A)
+up('32', 0.87, 1.20, 13.90, 14.98, 'S/A 32 bedroom 3 floor (3rd)', A[:5])
+up('31', 0.87, 1.20, 18.78, 19.87, 'S/A 31 bedroom 3 floor (3rd)', A[:5])
 ceil('38', 2.87, 3.95, 27.22, 27.55, 'S/A 38 hall ceiling (2nd)', A[:4])
 ceil('37', 5.61, 6.70, 32.63, 32.97, 'S/A 37 bath ceiling (2nd)', C)
 up('30', 5.03, 5.37, 30.92, 32.0, 'S/A 30 ensuite floor (3rd) - heated tile', C)
@@ -191,14 +193,21 @@ OUT.append(dict(id='EQ-F1', name='Basement return grille (schedule says BAS R/A 
 # water heater vent (existing - for coordination)
 E.append(dict(id='EQ-HWTV', name='Ex. HWT vent 3"', cat='equip', shape='cyl', lvl='B', axis='z', d=3, mat='steel', x0=5.5, x1=5.75, y0=7.55, y1=7.8, z0=5.4, z1=J0T))
 
-# Decision Oct 22 (Raff): all F-2 runs drop to hang directly under the 3rd-floor joists / beams, boxed in the 2nd-floor ceiling
-_SB = [e for e in E if e['lvl'] == 'S' and e['cat'] in ('joist', 'beam')]
+# Oct 22: F-2 runs come out of the joist space. Oct 25: where the old-peak platform exists (y 13.25-43.67) they sit on the
+# old joists inside the 12" knee-wall void; elsewhere they hang directly under the 3rd-floor joists / beams (boxed)
+_SB = [e for e in E if e['lvl'] == 'S' and e['cat'] in ('joist', 'beam') and e['mat'] != 'oldjoist']
+VF, VR = 13.25, 40.2
 for x in D:
+    if x['lvl'] == 'S' and x.get('axis') in ('x', 'y') and x['y0'] >= VF - 0.05 and x['y1'] <= VR + 0.05:
+        h = x['z1'] - x['z0']; base = L['OLDTB'] if (x['y0'] + x['y1']) / 2 < 28 else L['OLDTR']
+        x['z0'] = round(base + 0.02, 3); x['z1'] = round(x['z0'] + h, 3); x['invoid'] = True; continue
     if x['lvl'] == 'S' and x.get('axis') in ('x', 'y'):
         bot = min([s['z0'] for s in _SB if s['x0'] < x['x1'] and s['x1'] > x['x0'] and s['y0'] < x['y1'] and s['y1'] > x['y0']] or [L['J2B']])
         h = x['z1'] - x['z0']; x['z1'] = round(bot - 0.01, 3); x['z0'] = round(x['z1'] - h, 3); x['dropped'] = True
-    if x['id'] in ('R-4Rv', 'R-5Rv', 'R-6Rv'): x['z1'] = round(L['J2B'] - 0.3, 3); x['name'] = x['name'].replace(', through LVL5 line', '')
-    if x['id'] in ('R-1Rv', 'R-3Rv', 'R-2Rv'): x['z0'] = round(L['J2B'] - 0.7, 3)
+    if x['id'] in ('R-4Rv', 'R-5Rv', 'R-6Rv'): x['z1'] = round((L['OLDTB'] if x['y0'] < 28 else L['OLDTR']) + 0.4, 3); x['name'] = x['name'].replace(', through LVL5 line', '')
+    if x['id'] in ('R-1Rv', 'R-3Rv', 'R-2Rv'): x['z0'] = round((L['OLDTB'] if x['y0'] < 28 else L['OLDTR']) + 0.1, 3)
+    if x['id'] in ('D2-PL', 'R2-XD'): x['z1'] = round(L['J2B'] - 0.02, 3)
+    if x['id'] in ('T-37', 'T-38'): x['z0'] = round((L['C_BATH'] if x['y0'] >= 28 else L['C_FAM']) - 0.06, 3); x['z1'] = round((L['OLDTR'] if x['y0'] >= 28 else L['OLDTB']) + 0.05, 3)
 import re as _re
 _nm = {}
 for e in E:

@@ -29,6 +29,9 @@ for d in ducts:
             if ax in ('z', 't'): continue                       # boots / stacks shift within the bay
             if ax == jdir(t): continue                          # parallel run - sits in the bay
             if vol == 0: continue
+        if t['cat'] == 'wall' and t['mat'] == 'kneewall':
+            if vol > 0: clashes.append(dict(a=d['id'], b=t['id'], an=d['name'], bn=t['name'], kind='SOFT', vol=0))
+            continue
         if t['cat'] == 'wall':
             masonry = t['mat'] in ('parge', 'concrete', 'brick')
             if d['z0'] >= t['z1'] - 0.01: continue                 # duct runs above the top plate (in the joist space)
@@ -64,7 +67,7 @@ for d in ducts:
     if Ln < 1.5: continue
     if d['lvl'] == 'B' and d['z1'] <= L['J0B'] + 0.01:
         bulk.append(dict(id=d['id'], len_ft=round(Ln, 1), under_ft=round(d['z0'], 2), lvl='B', note='below basement joists'))
-    if d['lvl'] == 'S' and d.get('dropped'):
+    if d['lvl'] == 'S' and d.get('dropped') and not d.get('invoid'):
         fl = L['FFL1R'] if (d['y0'] + d['y1']) / 2 >= 28 else L['FFL1']
         bulk.append(dict(id=d['id'], len_ft=round(Ln, 1), under_ft=round(d['z0'] - 0.1 - fl, 2), lvl='S', note=f"hung under the 3rd-floor joists, boxed - {int(d['z0']-0.1-fl)}'-{round(((d['z0']-0.1-fl)%1)*12)}\" clear (decision Oct 22)"))
 # in-wall stacks vs wall cavity

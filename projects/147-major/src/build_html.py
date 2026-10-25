@@ -11,11 +11,14 @@ head = re.sub(r'<div class="sub">.*?</div>', '<div class="sub">Two systems: F-1 
 head = head.replace('<button id="lv-x" data-l="X" aria-pressed="false">Exterior</button><button id="lv-b" data-l="B" aria-pressed="false">Basement</button><button id="lv-g" data-l="G" aria-pressed="true">Main</button><button id="lv-s" data-l="S" aria-pressed="false">Second</button><button id="lv-a" data-l="A" aria-pressed="false">All</button>',
   '<button id="lv-x" data-l="X" aria-pressed="false">Exterior</button><button id="lv-b" data-l="B" aria-pressed="false">Basement</button><button id="lv-g" data-l="G" aria-pressed="false">Main</button><button id="lv-s" data-l="S" aria-pressed="true">Second</button><button id="lv-t" data-l="T" aria-pressed="false">Third</button><button id="lv-a" data-l="A" aria-pressed="false">All</button>')
 head = head.replace('aria-label="3D coordination model of 149 Gledhill"', 'aria-label="3D coordination model of 147 Major Street"')
+head = head.replace('<div class="focus" id="focus" hidden></div>', '<div class="focus" id="focus" hidden></div><div id="secov" hidden style="position:absolute;inset:52px 10px 10px 10px;background:var(--panel);border:1px solid var(--rule);overflow:auto;padding:12px;z-index:5"></div>')
 head = head.replace('<div class="k">PROJECT</div><div>149 Gledhill Ave, Toronto</div><div class="k">SOURCES</div><div>Permit A5–A9 · GTA M1–M5 · Cab Oct 7</div>',
   '<div class="k">PROJECT</div><div>147 Major St, Toronto · Ashish &amp; Shivani</div><div class="k">PERMITS</div><div>26 167838 BLD 00 · HVA 00</div><div class="k">SOURCES</div><div>Permit A6–A12 · HVAC LO# 113963 · Mat. list Oct 12</div>')
 head = re.sub(r'<div class="note" id="note">.*?</div>', '<div class="note" id="note">Accuracy: walls ±½" (vector, 13.5 pt/ft, checked against 16\'-8", 28\'-11", 60\'-3½"). HVAC sheets registered to the permit plans by translation, same scale. Joists at drawn spacing; in-bay branches can shift and are not flagged. Cabinets follow permit A7 until the 9/8 cabinet set geometry is loaded.</div>', head, count=1)
 head = head.replace('.tag.b{background:#6b4ea0;color:#fff}', '.tag.b{background:#6b4ea0;color:#fff}\n.dl{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.dl span{font:500 11px var(--f-mono);border:1px solid var(--rule);padding:2px 6px;color:var(--muted)}')
-head = head.replace('<div class="tally">', '<div class="tally">', 1)
+head = head.replace('<button role="tab" id="tab-e" aria-selected="false" data-t="e">Equipment</button>', '<button role="tab" id="tab-e" aria-selected="false" data-t="e">Equipment</button><button role="tab" id="tab-s" aria-selected="false" data-t="s">Section</button>')
+head = head.replace('--canvas:#DCE3E6;', '--canvas:#DCE3E6; --sg:#9DBF7E;--sc:#B9B6AE;--sk:#1C2321;--sw:#C9C3B6;--sj:#C9A16B;--sn:#B9873F;--sd:#AEB7BE;--se:#5C666C;--sr:#6E7174;--sl:#8A9590;--sm:#4A5551;')
+head = head.replace('--canvas:#1B2124;color-scheme:dark}', '--canvas:#1B2124;--sg:#3F5A32;--sc:#4A4843;--sk:#E6ECE9;--sw:#59544B;--sj:#8C6E45;--sn:#A07A3A;--sd:#6F7A82;--se:#8C979E;--sr:#3A3D40;--sl:#6B7772;--sm:#AFBBB6;color-scheme:dark}')
 # ---------------- JS patches
 start = js.index('const DUCTFIX = {'); end = js.index('const CL=groupClashes();')
 blocks = 'const DUCTFIX = ' + json.dumps(Q['fix'], ensure_ascii=False) + ';\n'
@@ -26,7 +29,7 @@ blocks += "const OPEN=QS.filter(q=>q.status==='open').map(q=>[q.owner,q.title,q.
 js = js[:start] + blocks + js[end:]
 js = js.replace("const L = M.levels;", "const L = M.levels; L.CEIL1=L.CEIL1; ")
 # materials
-js = js.replace(" whitedove:{map:'shaker',c:'#EFECE3',r:.55},", " whitedove:{map:'shaker',c:'#EFECE3',r:.55}, walnut:{map:'walnut',r:.5}, whitegloss:{map:'fluted',c:'#FBFBF8',r:.12},")
+js = js.replace(" whitedove:{map:'shaker',c:'#EFECE3',r:.55}, oldjoist:{map:'lumber',c:'#9FB8E8',r:.8}, kneewall:{c:'#2E9E5A',r:.8,o:.5},", " whitedove:{map:'shaker',c:'#EFECE3',r:.55}, oldjoist:{map:'lumber',c:'#9FB8E8',r:.8}, kneewall:{c:'#2E9E5A',r:.8,o:.5}, walnut:{map:'walnut',r:.5}, whitegloss:{map:'fluted',c:'#FBFBF8',r:.12},")
 js = js.replace(" drywall:[cnv(128,128,", """ walnut:[cnv(512,512,(g,w,h)=>{g.fillStyle='#6B4A33';g.fillRect(0,0,w,h);g.globalAlpha=.22;for(let k=0;k<60;k++){g.strokeStyle=k%3?'#3E2817':'#9C7253';g.lineWidth=1+Math.random()*2;g.beginPath();let y=Math.random()*h;g.moveTo(0,y);for(let x=0;x<=w;x+=32){y+=(Math.random()-.5)*6;g.lineTo(x,y)}g.stroke()}g.globalAlpha=1;g.fillStyle='rgba(0,0,0,.25)';g.fillRect(0,h/2-1,w,2)}),2.5,2.5],
  fluted:[cnv(256,256,(g,w,h)=>{g.fillStyle='#fff';g.fillRect(0,0,w,h);for(let i=0;i<16;i++){const gr=g.createLinearGradient(i*16,0,i*16+16,0);gr.addColorStop(0,'rgba(0,0,0,.10)');gr.addColorStop(.5,'rgba(255,255,255,0)');gr.addColorStop(1,'rgba(0,0,0,.06)');g.fillStyle=gr;g.fillRect(i*16,0,16,h)}}),1,1],
  drywall:[cnv(128,128,""")
@@ -55,13 +58,13 @@ js = js[:s] + """function selectBulk(){sel={type:'b'};ghostAll(false);clearTags(
   M.elements.filter(e=>e.cat==='bulkhead').forEach(e=>{const m=meshes[e.id];m.visible=true;m.userData.orig=m.material;m.material=BULKMAT;box.expandByObject(m);
     const w=Math.round(Math.min(e.x1-e.x0,e.y1-e.y0)*12),Ln=Math.max(e.x1-e.x0,e.y1-e.y0),cl=e.clear;if(Ln>3)tag(e.id,`${e.name.replace('Proposed bulkhead - ','')}: ${w}" · ${Ln.toFixed(1)} ft · ${Math.floor(cl)}'-${Math.round((cl%1)*12)}" clear`)});
   fly={t0:performance.now(),p0:C.position.clone(),c0:CTL.target.clone(),p1:new THREE.Vector3(8.3,92,30.6),c1:new THREE.Vector3(8.3,20,30)};
-  focusTxt('2nd-floor ceiling bulkheads (decided Oct 22)','<div>All F-2 runs hang directly under the 3rd-floor joists. The 2nd floor steps down 16" behind the jog (y 28 ft). Rear level (hall, bath, laundry, W.I.C., bedroom 2): 10\\'-4½" ceiling, so C, B, Y, 6R and the branches box at 9\\'-5" to 9\\'-8" (deeper TJI 210s near the step). Front level (primary, family room): 9\\'-0½" ceiling, so trunk A and return Z box at 8\\'-1" to 8\\'-2". Shown in orange.</div>')}
+  focusTxt('2nd-floor bulkheads (revised Oct 25)','<div>Over the hall / bath / laundry the F-2 trunks sit in the ~25" void above the red old joists. Over the family room the void is only ~6", so A and Z need a decision (Q14). Bulkheads remain in the primary bedroom, mech room and bedroom 2. The 2nd floor steps down 16" behind the jog (y 28 ft). Rear level (hall, bath, laundry, W.I.C., bedroom 2): 10\\'-4½" ceiling, so C, B, Y, 6R and the branches box at 9\\'-5" to 9\\'-8" (deeper TJI 210s near the step). Front level (primary, family room): 9\\'-0½" ceiling, so trunk A and return Z box at 8\\'-1" to 8\\'-2". Shown in orange.</div>')}
 """ + js[e:]
 # list text
 js = js.replace("sm.innerHTML=`<b>Review status, Oct 18</b><div>${RESOLVED.length} resolved · ${SITE.length} to verify on site · ${OPEN.length} open with owners. Detailed clash cards below.</div>`",
   "sm.innerHTML=`<b>Review status, Oct 22</b><div>${RESOLVED.length} resolved · ${SITE.length} to verify on site · ${OPEN.length} open with owners. Questions go one at a time in chat; answers land here.</div><div class=\"dl\"><span>147-Major-clash-markup.pdf</span><span>147-Major-model.ifc</span><span>sent in chat</span></div>`")
 js = js.replace("list.appendChild(card('info','Basement bulkhead (decision Oct 16): show me','4 sections · 25–43\" wide · 8\\'-2\" clear','One bulkhead along the west wall; short cross-bulkhead in the games room.',sel&&sel.type==='b',()=>{selectBulk();renderList()}));",
-  "list.appendChild(card('info','2nd-floor bulkheads (decided Oct 22): show me',`${M.elements.filter(e=>e.cat==='bulkhead').length} runs · front 8\\'-1\"–8\\'-2\" · rear 9\\'-5\"–9\\'-8\" clear`,'Front level: trunk A + return Z. Rear (16\" lower) level: C, B, Y, 6R and branches.',sel&&sel.type==='b',()=>{selectBulk();renderList()}));")
+  "list.appendChild(card('info','2nd-floor bulkheads (revised Oct 25): show me',`${M.elements.filter(e=>e.cat==='bulkhead').length} runs · front 8\\'-1\"–8\\'-2\" · rear 9\\'-5\"–9\\'-8\" clear`,'Primary: A front run. Mech + bedroom 2: C / B + branches. Hall / bath / laundry: in the void.',sel&&sel.type==='b',()=>{selectBulk();renderList()}));")
 js = js.replace("h.textContent=`Risers sticking out past 4\" furring (${p.length})`", "h.textContent=`Stacks too deep for their 2x4 wall (${p.length})`")
 js = js.replace("p.forEach(x=>list.appendChild(card('info',`${byId[x.id].name.split(' - ')[0]} sticks out ${x.inches}\"`,'exterior wall furring',`Use a 3-1/4×10 wall stack, fur 2x6 locally, or box it out.`",
   "p.forEach(x=>list.appendChild(card('info',`${byId[x.id].name.split(' (')[0]} sticks out ${x.inches}\"`,`${x.wall}\" wall`,`Round stack is deeper than the stud cavity. Use a 3-1/4×10 / 3-1/4×14 wall stack, build the wall 2x6, or box it out.`")
@@ -86,7 +89,12 @@ js = js.replace("if(location.hash==='#bulkhead')", "if(location.hash==='#bulkhea
 js = js.replace("const LAYER={wall:'Walls',", "const LAYER={wall:'Walls',")
 # gap / T-18 special removal safety
 assert 'T-18' not in js.split('function selectTrace')[1].split('function selectBulk')[0]
-M_js = 'const M = ' + json.dumps(M, separators=(',', ':')) + ';'
+SEC = open('section.svg').read()
+js = js.replace("document.querySelectorAll('[data-t]').forEach(b=>b.onclick", """if(false){}
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick""", 1)
+js = js.replace("function renderList(){list.innerHTML='';", "function renderList(){list.innerHTML='';const so=document.getElementById('secov');if(so){so.hidden=tab!=='s';if(tab==='s'&&!so.innerHTML)so.innerHTML=SECSVG}", 1)
+js = js.replace(" if(tab==='t'){", " if(tab==='s'){const d=document.createElement('div');d.style.padding='10px 12px';d.innerHTML=`<b>Section A-A, redrawn on site data (Oct 25)</b><div class=\"m\" style=\"margin:4px 0 8px\">Front (Major St) at left. Old joists at the original peak: blue over the family rm / stair, red over the kitchen wing. Yellow = existing platform. Green = knee wall + void (~6\\\" over blue, ~25\\\" over red). Orange = bulkheads. Ceilings per David\\'s site measurements.</div><div style=\"overflow-x:auto;background:var(--panel);border:1px solid var(--rule)\">${SECSVG}</div>`;list.appendChild(d);M.ceil.forEach(c=>{const e=document.createElement('div');e.className='eq';e.innerHTML=`<b>${c.ft}</b> ${c.level}`;list.appendChild(e)})}\n if(tab==='t'){", 1)
+M_js = 'const SECSVG = ' + json.dumps(SEC) + ';\nconst M = ' + json.dumps(M, separators=(',', ':')) + ';'
 out = head + '\n' + M_js + '\n' + js
 open('147-major-clash-model.html', 'w').write(out)
 print(len(out))

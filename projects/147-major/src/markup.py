@@ -92,6 +92,7 @@ for lv in ('B', 'G', 'S', 'T'):
         c.setFillColor(AMB); c.drawString(32, yy - 26 - len(used) * 14 + 2, '')
     c.showPage(); c.save(); buf.seek(0)
     page.merge_page(PdfReader(buf).pages[0]); wr.add_page(page)
+wr.add_page(PdfReader('147-Major-Section-AA-revised.pdf').pages[0])
 wr.add_metadata({'/Title': '147 Major St - HVAC clash mark-up', '/Author': 'PalmView Custom Homes'})
 wr.write(open('147-Major-clash-markup.pdf', 'wb'))
 print('ok')

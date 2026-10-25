@@ -7,10 +7,18 @@ def el(geo): return round((geo - 107.63) / FT, 3)
 L = dict(SLAB=0.0, FFL0=el(110.52), FFL1=el(113.85), FFL2=el(116.90), TOP=el(119.60), ROOF=el(119.92), GRADE=el(109.93))
 # floor build-ups (3/4 subfloor + 3/4 finish = 1.5")
 L['J0T'] = round(L['FFL0'] - 0.125, 3); L['J0B'] = round(L['J0T'] - 11.25/12, 3)          # ex. 2x12 under main floor
-L['J1T'] = round(L['FFL1'] - 0.125, 3); L['J1B'] = round(L['J1T'] - 11.25/12, 3)          # ex. 2x12 under 2nd floor
-L['FFL1R'] = round(L['FFL1'] - 16/12, 3); L['J1TR'] = round(L['FFL1R'] - 0.125, 3); L['J1BR'] = round(L['J1TR'] - 11.25/12, 3)
+L['J1T'] = round(L['FFL1'] - 0.125, 3); L['J1B'] = round(L['J1T'] - 9.25/12, 3)           # ex. 2x10 under 2nd floor, main house (David site visit)
+L['FFL1R'] = round(L['FFL1'] - 13/12, 3); L['J1TR'] = round(L['FFL1R'] - 0.125, 3); L['J1BR'] = round(L['J1TR'] - 7.25/12, 3)   # rear ~13" lower (2R); ex. 2x8 over kitchen
+L['J1BA'] = round(L['J1TR'] - 12/12, 3)   # 12" I-joists over the addition
 L['J2T'] = round(L['FFL2'] - 0.125, 3); L['J2B'] = round(L['J2T'] - 9.5/12, 3)            # 9-1/2" TJI under 3rd floor
-L['CEIL0'] = round(L['J1B'] - 0.05, 3); L['CEIL0R'] = round(L['J1BR'] - 0.05, 3); L['CEIL1'] = round(L['J2B'] - 0.05, 3); L['CEIL2'] = round(L['TOP'], 3)
+VF, VR = 13.25, 40.2    # old joists lower than the platform: blue over family rm / stair, red over hall / bath / laundry (mech room goes to 120")
+# measured 2nd-floor ceilings (David site visit): master 105", family rm 105", bath 99", old room / mech 101" (to go to 120"), new room 120"
+L['C_MAS'] = round(L['FFL1'] + 105/12, 3); L['C_FAM'] = round(L['FFL1'] + 105/12, 3); L['C_BATH'] = round(L['FFL1R'] + 99/12, 3); L['C_NEW'] = round(L['FFL1R'] + 120/12, 3)
+L['DECK'] = round(L['FFL2'] - 3/12, 3)    # 3rd-floor deck on sleepers / knee-wall plates over the old joists
+L['OLDBB'] = round(L['C_FAM'] + 0.04, 3); L['OLDTB'] = round(L['OLDBB'] + 5.5/12, 3)      # blue: single 2x6 assumed above the 105" ceiling
+L['OLDBR'] = round(L['C_BATH'] + 0.04, 3); L['OLDTR'] = round(L['OLDBR'] + 5.5/12, 3)     # red: single 2x6 assumed above the 99" ceiling
+L['OLDT'] = L['OLDTB']; L['OLDB'] = L['OLDBB']; L['CEIL1V'] = L['C_FAM']
+L['CEIL0'] = round(L['J1B'] - 0.05, 3); L['CEIL0R'] = round(L['J1BR'] - 0.05, 3); L['CEIL0A'] = round(L['J1BA'] - 0.05, 3); L['CEIL1'] = round(L['J2B'] - 0.05, 3); L['CEIL2'] = round(L['TOP'], 3)
 E = []
 def box(id, name, cat, lvl, x0, x1, y0, y1, z0, z1, mat, **kw):
     d = dict(id=id, name=name, cat=cat, shape='box', lvl=lvl, x0=round(min(x0,x1),3), x1=round(max(x0,x1),3), y0=round(min(y0,y1),3), y1=round(max(y0,y1),3), z0=round(z0,3), z1=round(z1,3), mat=mat)
@@ -132,21 +140,24 @@ WIN = [
 FFL = {'B': 0.0, 'G': L['FFL0'], 'S': L['FFL1'], 'T': L['FFL2']}
 REAR = 28.0   # 2nd floor steps down 16" behind this line (jog / kitchen wing)
 def ffl(lv, y0): return L['FFL1R'] if (lv == 'S' and y0 >= REAR - 0.05) else FFL[lv]
-def gtop(y0): return L['J1BR'] if y0 >= REAR - 0.05 else L['J1B']
+def gtop(y0): return L['J1BA'] if y0 >= 43.6 else (L['J1BR'] if y0 >= REAR - 0.05 else L['J1B'])
 def wall_boxes():
     n = 0
     for lv, ws in WALLS.items():
         ws2 = []
         for w in ws:   # split walls that run across the 2nd-floor step line
             nm, x0, x1, y0, y1, mat, ext = w
-            if lv in ('G', 'S') and y0 < REAR - 0.1 and y1 > REAR + 0.1 and (y1 - y0) > (x1 - x0):
-                ws2 += [(nm, x0, x1, y0, REAR, mat, ext), (nm, x0, x1, REAR, y1, mat, ext)]
+            cuts = [REAR] if lv == 'G' else ([VF, REAR, VR] if lv == 'S' else [])
+            cuts = [c for c in cuts if y0 < c - 0.1 and y1 > c + 0.1 and (y1 - y0) > (x1 - x0)]
+            if cuts:
+                pts = [y0] + cuts + [y1]
+                ws2 += [(nm, x0, x1, a, b, mat, ext) for a, b in zip(pts, pts[1:])]
             else: ws2.append(w)
         for (nm, x0, x1, y0, y1, mat, ext) in ws2:
             z0, z1 = ffl(lv, y0), STRUCT_TOP[lv] if lv != 'T' else L['TOP']
             if lv == 'B': z1 = L['J0B']
             if lv == 'G': z1 = gtop(y0)
-            if lv == 'S': z1 = L['J2B']
+            if lv == 'S': z1 = (L['C_MAS'] if y1 <= VF + 0.35 else L['C_FAM'] if y1 <= REAR + 0.35 else L['C_BATH'] if y1 <= VR + 0.35 else L['J2B'])
             n += 1
             wid = f'W{lv}{n}'
             th = min(x1-x0, y1-y0)
@@ -227,22 +238,27 @@ joists('J0B', 'Ex. 2x12 @16" (main floor, kitchen wing)', 'B', L['J0T'], 11.25/1
 joists('J0C', 'Ex. 2x12 @16" (family room, to remain)', 'B', L['J0T'], 11.25/12, 'x', 16, 5.1, 16.25, 44.34, 55.6)
 joists('J0D', 'New 2x12 @16" (addition strip)', 'B', L['J0T'], 11.25/12, 'x', 16, 0.96, 4.25, 44.5, 55.72)
 # 2nd floor framing
-joists('J1A', 'Ex. 2x12 @16" (2nd floor, front - upper level)', 'G', L['J1T'], 11.25/12, 'x', 16, 0.85, 16.44, 0.62, 27.95)
-joists('J1C', 'Ex. 2x12 @16" (2nd floor over kitchen wing - 16" lower)', 'G', L['J1TR'], 11.25/12, 'x', 16, 5.0, 16.44, 28.3, 43.5)
-joists('J1B', 'New 11-7/8" TJI 230 @16" (2nd floor over family rm)', 'G', L['J1TR'], 11.875/12, 'x', 16, 0.69, 16.2, 43.97, 55.9, 'lvl')
-box('BM-G1', '2-1 3/4x11 7/8 2.0E Microlam LVL (FL)', 'beam', 'G', 5.05, 16.0, 43.68, 43.97, L['J1TR']-11.875/12, L['J1TR'], 'lvl')
+joists('J1A', 'Ex. 2x10 @16" (2nd floor, main house - upper level)', 'G', L['J1T'], 9.25/12, 'x', 16, 0.85, 16.44, 0.62, 27.95)
+joists('J1C', 'Ex. 2x8 @16" (2nd floor over kitchen wing - ~13" lower)', 'G', L['J1TR'], 7.25/12, 'x', 16, 5.0, 16.44, 28.3, 43.5)
+joists('J1B', 'New 12" I-joists @16" (2nd floor over family rm, as built)', 'G', L['J1TR'], 12/12, 'x', 16, 0.69, 16.2, 43.97, 55.9, 'lvl')
+box('BM-G1', '2-1 3/4x11 7/8 2.0E Microlam LVL (FL)', 'beam', 'G', 5.05, 16.0, 43.68, 43.97, L['J1TR']-1.0, L['J1TR'], 'lvl')
 box('BM-G2', 'LVL 3 (DRP) over 10\' slider', 'beam', 'G', 5.0, 16.0, 55.6, 55.9, L['J1BR']-0.5, L['J1TR'], 'lvl')
 box('BM-G3', 'WB2 (DRP) rear storage', 'beam', 'G', 0.2, 5.0, 55.6, 55.9, L['J1BR']-0.5, L['J1TR'], 'lvl')
 # 3rd floor framing (2nd floor ceiling) - permit A8 labels
 J2T = L['J2T']
-joists('J2A', 'New 9-1/2" TJI 360 @12" (3rd floor, front)', 'S', J2T, 9.5/12, 'x', 12, 0.85, 16.0, 0.15, 12.95, 'lvl')
+joists('JO-Y', 'Ex. platform at the original peak - joists on joists (2x6 + 2x6 assumed)', 'S', L['DECK'], L['DECK'] - L['C_MAS'] - 0.04, 'x', 16, 0.98, 16.44, 0.15, 12.95, 'oldjoist')
 box('BM-S1', 'New LVL5 (FL) - closet line', 'beam', 'S', 0.85, 16.0, 12.95, 13.25, J2T-9.5/12, J2T, 'lvl')
-joists('J2B', 'Ex. 2x12 @16" hung off new header (family rm)', 'S', J2T, 11.25/12, 'x', 16, 0.85, 12.9, 13.25, 26.4)
+joists('SL-B', '3rd-floor deck sleepers on knee wall (2x4 flat)', 'S', L['DECK'], 1.5/12, 'x', 16, 0.98, 16.44, VF, REAR)
+joists('SL-R', '3rd-floor deck sleepers on knee wall (2x4 flat)', 'S', L['DECK'], 1.5/12, 'x', 16, 5.0, 16.44, REAR, VR)
+# Site finding Oct 25: old joists at the original peak sit ~12" below the new 3rd-floor joists; knee walls make up the height
+joists('JO-B', 'Ex. old joists - blue zone over family rm (2x6 assumed, above the 105" ceiling)', 'S', L['OLDTB'], 5.5/12, 'x', 16, 0.98, 13.3, VF, REAR, 'oldjoist')
+joists('JO-R', 'Ex. old joists - red zone over hall / bath / laundry (2x6 assumed, above the 99" ceiling)', 'S', L['OLDTR'], 5.5/12, 'x', 16, 5.0, 16.44, REAR, VR, 'oldjoist')
+for i, (y0, y1, nm) in enumerate([(VF, VF + 0.29, 'front end'), (REAR - 0.15, REAR + 0.15, 'at the 2nd-floor step'), (VR - 0.29, VR, 'rear end')]):
+    zt = L['OLDTB'] if i == 0 else L['OLDTR']
+    box(f'KW-{i}', f'Knee wall on old joists - {nm} (layout TBC)', 'wall', 'S', 0.98 if i < 2 else 5.0, 16.44, y0, y1, zt, L['DECK'] - 1.5/12, 'kneewall')
 box('BM-S2', 'New LVL5 (FL) - stair side', 'beam', 'S', 12.9, 13.2, 13.25, 26.6, J2T-11.25/12, J2T, 'lvl')
 box('BM-S3', 'New LVL5 (FL) - stair head', 'beam', 'S', 11.0, 16.0, 26.4, 26.7, J2T-11.875/12, J2T, 'lvl')
-joists('J2C', 'New 11-7/8" TJI 210 @16" (3rd floor mid)', 'S', J2T, 11.875/12, 'x', 16, 0.98, 13.2, 26.7, 28.0, 'lvl')
-joists('J2C2', 'New 11-7/8" TJI 210 @16" (3rd floor mid)', 'S', J2T, 11.875/12, 'x', 16, 5.0, 13.2, 28.0, 33.0, 'lvl')
-joists('J2D', 'New 9-1/2" TJI 230 @16" (3rd floor)', 'S', J2T, 9.5/12, 'x', 16, 5.0, 16.2, 33.0, 43.67, 'lvl')
+joists('J2D', 'New 9-1/2" TJI 230 @16" (3rd floor over mech rm)', 'S', J2T, 9.5/12, 'x', 16, 5.0, 16.2, VR, 43.67, 'lvl')
 joists('J2D2', 'New 9-1/2" TJI 230 @16" (3rd floor)', 'S', J2T, 9.5/12, 'x', 16, 0.69, 16.2, 43.67, 46.3, 'lvl')
 box('BM-S4', 'New LVL4 (FL)', 'beam', 'S', 0.45, 16.0, 46.3, 46.6, J2T-9.5/12, J2T, 'lvl')
 joists('J2E', 'CANT. 9-1/2" TJI 230 @16" (bedroom 2 ceiling / balcony)', 'S', J2T, 9.5/12, 'y', 16, 46.6, 60.4, 1.75, 14.5, 'lvl')
