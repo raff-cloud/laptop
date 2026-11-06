@@ -26,7 +26,7 @@ for d in ducts:
         if g > TOL: continue
         ax = d.get('axis')
         if t['cat'] == 'joist':
-            if t.get('mat') == 'oldjoist' and vol == 0: continue          # duct resting on the old joists
+            if t.get('mat') == 'oldjoist' and vol < 0.01: continue          # duct resting on the old joists
             if ax in ('z', 't'): continue                       # boots / stacks shift within the bay
             if ax == jdir(t): continue                          # parallel run - sits in the bay
             if vol == 0: continue
