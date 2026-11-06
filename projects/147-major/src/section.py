@@ -3,7 +3,8 @@ import json
 M = json.load(open('model.json')); L = M['levels']
 F0, F1, F1R, F2, TOP, ROOF, GR = L['FFL0'], L['FFL1'], L['FFL1R'], L['FFL2'], L['TOP'], L['ROOF'], L['GRADE']
 J0T, J0B, J1T, J1B, J1TR, J1BR, J2T, J2B = L['J0T'], L['J0B'], L['J1T'], L['J1B'], L['J1TR'], L['J1BR'], L['J2T'], L['J2B']
-CM, CF, CB, DK, OTB, OTR = L['C_MAS'], L['C_FAM'], L['C_BATH'], L['DECK'], L['OLDTB'], L['OLDTR']
+CM, CF, CB, DK, OTB, OTR = L['C_MAS'], L['C_FAM'], L['C_RED'], L['DECK'], L['OLDTB'], L['OLDTR']
+CBATH = L['C_BATH']
 VF, ST, VR, AD, RW = 13.25, 28.0, 40.2, 43.67, 55.97
 P = []   # (kind, cls, data)
 def rect(y0, z0, y1, z1, cls): P.append(('rect', cls, (y0, z0, y1, z1)))
@@ -42,14 +43,14 @@ joists(0.15, VF, DK, DK - CM - 0.04, 'jy', 1.0); line(0.15, CM, VF, CM, 'ceil')
 joists(VF, ST, OTB, 5.5 / 12, 'jb'); line(VF, CF, ST, CF, 'ceil')
 rect(VF, OTB, ST, DK, 'void'); rect(VF, DK - 0.125, ST, DK, 'sleep')
 # zone 3: red old joists over the 99" ceiling
-joists(ST, VR, OTR, 5.5 / 12, 'jr'); line(ST, CB, VR, CB, 'ceil')
+joists(ST, VR, OTR, 5.5 / 12, 'jr'); line(ST, CB, VR, CB, 'ceil'); line(ST, CBATH, 36.3, CBATH, 'lvl'); text(ST + 0.3, CBATH - 0.5, 'bath dropped ceiling 8\'-3" (David)', 'call')
 rect(ST, OTR, VR, DK, 'void'); rect(ST, DK - 0.125, VR, DK, 'sleep')
 for y in (VF, ST, VR - 0.3): rect(y, OTB if y < ST else OTR, y + 0.3, DK - 0.125, 'kw')
 # mech room + zone 4: new 9-1/2" TJIs at full depth
 joists(VR, 56.0, J2T, 9.5 / 12, 'jn'); line(VR, L['CEIL1'], RW, L['CEIL1'], 'ceil')
 # ducts
 rect(VF + 0.3, OTB + 0.03, ST - 0.3, OTB + 0.70, 'ductx'); text(VF + 0.4, CF - 1.5, 'A + Z are 8" deep - void here is only ~6"', 'callx')
-rect(ST + 0.3, OTR + 0.03, VR - 0.4, OTR + 0.70, 'duct'); text((ST + VR) / 2, OTR + 0.36, 'Trunk C 18x8 + return Y 16x8 (void ~25")', 'ductt', 'middle')
+rect(ST + 0.3, OTR + 0.03, VR - 0.4, OTR + 0.70, 'duct'); text((ST + VR) / 2, OTR + 0.36, 'Trunk C 18x8 + return Y 16x8 (void 16" measured)', 'ductt', 'middle')
 rect(0.9, CM - 0.68, VF, CM, 'duct'); rect(0.75, CM - 0.85, VF, CM, 'bulk'); text((0.9 + VF) / 2, CM - 0.45, 'A 10x8 in bulkhead', 'ductt', 'middle')
 rect(VR + 0.2, J2B - 0.68, RW - 0.3, J2B, 'duct'); rect(VR + 0.05, J2B - 0.85, RW - 0.2, L['CEIL1'], 'bulk'); text((VR + RW) / 2, J2B - 0.45, 'C / B + branches in bulkhead', 'ductt', 'middle')
 rect(41.84, F1R, 43.6, F1R + 5.3, 'equip'); text(42.72, F1R + 2.6, 'F-2', 'eqt', 'middle')
@@ -82,7 +83,7 @@ text(19, F2 + 5.5, 'BEDROOM 3 / ENSUITE / W.I.C.', 'room'); text(46, F2 + 5.5, '
 # callouts
 text(0.6, DK + 0.5, 'Existing platform at the original peak - joists on joists (yellow)', 'cally')
 text(VF + 0.4, CF - 0.55, 'Blue old joists over the 105" ceiling (2x6 assumed)', 'callb')
-text(ST + 0.4, CB - 0.55, 'Red old joists over the 99" ceiling (2x6 assumed)', 'callr')
+text(ST + 0.4, CB - 0.55, 'Red old joists - 16" void above (measured)', 'callr')
 text(ST + 0.6, DK + 1.35, 'Knee wall + sleepers bring the deck to 116.90 (green)', 'callg')
 text(ST + 0.2, F1 + 0.35, '2R step (~13")', 'call')
 text(VR + 3.0, DK + 0.5, 'New 9-1/2" TJI (mech rm + addition)', 'call')
@@ -163,7 +164,7 @@ c.setFillColor(HexColor('#1C2321')); c.setFont('Helvetica-Bold', 15); c.drawStri
 c.setFont('Helvetica', 9)
 for i, s in enumerate(['PalmView Custom Homes  ·  coordination drawing  ·  Oct 25, 2026  ·  NOT FOR CONSTRUCTION - for HVAC / framing coordination only',
                        'Permit A12 section + geodetic levels (A10-A12) + David site visit (framing and measured ceilings) + Raff sketch Oct 25 (platform, old joists, knee wall).',
-                       'Assumed: old joists 2x6, 3rd-floor deck on 2x4 sleepers (3" build-up) at permit 116.90. Platform zone 1 front, blue 13\'-3" to 28\'-0", red 28\'-0" to 40\'-2" (mech room goes to 120"). Confirm on site.',
+                       'Measured: 16" void over the red joists (room beside the furnace room). Assumed: old joists 2x6, deck on 2x4 sleepers (3") at permit 116.90. Platform zone 1 front, blue 13\'-3" to 28\'-0", red 28\'-0" to 40\'-2" (mech room goes to 120"). Confirm on site.',
                        'Scale 3/16" = 1\'-0" (11x17). Front (Major St) at left. Rear 2nd floor ~13" lower (fits David\'s 118" / 108" / 105" main-floor ceilings and UP 2R).']):
     c.drawString(40, H - 58 - i * 12, s)
 c.showPage(); c.save()
