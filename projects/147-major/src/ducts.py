@@ -195,19 +195,22 @@ E.append(dict(id='EQ-HWTV', name='Ex. HWT vent 3"', cat='equip', shape='cyl', lv
 
 # Oct 22: F-2 runs come out of the joist space. Oct 25: where the old-peak platform exists (y 13.25-43.67) they sit on the
 # old joists inside the 12" knee-wall void; elsewhere they hang directly under the 3rd-floor joists / beams (boxed)
-_SB = [e for e in E if e['lvl'] == 'S' and e['cat'] in ('joist', 'beam') and e['mat'] != 'oldjoist']
+# Nov 10 (Raff): one dropped ceiling across the whole 2nd floor at the red-zone ceiling elevation (C_DROP).
+# Red zone: ducts sit on the old joists in the 16" void. Everywhere else: ducts hang tight under the lowest structure
+# above (platform, blue old joists, new TJIs, LVLs) inside the dropped-ceiling plenum - no bulkheads.
+_SB = [e for e in E if e['lvl'] == 'S' and e['cat'] in ('joist', 'beam') and not e['id'].startswith(('DC-', 'SL-'))]
 VF, VR = 13.25, 40.2
 for x in D:
-    if x['lvl'] == 'S' and x.get('axis') in ('x', 'y') and x['y0'] >= VF - 0.05 and x['y1'] <= VR + 0.05:
-        h = x['z1'] - x['z0']; base = L['OLDTB'] if (x['y0'] + x['y1']) / 2 < 28 else L['OLDTR']
-        x['z0'] = round(base + 0.02, 3); x['z1'] = round(x['z0'] + h, 3); x['invoid'] = True; continue
+    if x['lvl'] == 'S' and x.get('axis') in ('x', 'y') and 28 <= (x['y0'] + x['y1']) / 2 <= VR and x['y1'] <= VR + 0.05:
+        h = x['z1'] - x['z0']; x['z0'] = round(L['OLDTR'] + 0.02, 3); x['z1'] = round(x['z0'] + h, 3); x['invoid'] = True; continue
     if x['lvl'] == 'S' and x.get('axis') in ('x', 'y'):
-        bot = min([s['z0'] for s in _SB if s['x0'] < x['x1'] and s['x1'] > x['x0'] and s['y0'] < x['y1'] and s['y1'] > x['y0']] or [L['J2B']])
-        h = x['z1'] - x['z0']; x['z1'] = round(bot - 0.01, 3); x['z0'] = round(x['z1'] - h, 3); x['dropped'] = True
-    if x['id'] in ('R-4Rv', 'R-5Rv', 'R-6Rv'): x['z1'] = round((L['OLDTB'] if x['y0'] < 28 else L['OLDTR']) + 0.4, 3); x['name'] = x['name'].replace(', through LVL5 line', '')
+        bot = min([s['z0'] for s in _SB if not s['id'].startswith('JO-R') and s['x0'] < x['x1'] and s['x1'] > x['x0'] and s['y0'] < x['y1'] and s['y1'] > x['y0']] or [L['J2B']])
+        h = x['z1'] - x['z0']; x['z1'] = round(bot - 0.01, 3); x['z0'] = round(x['z1'] - h, 3); x['invoid'] = True
+        x['plenum_gap_in'] = round((x['z0'] - (L['C_DROP'] + 0.04 + 1.5/12)) * 12, 1)
+    if x['id'] in ('R-4Rv', 'R-5Rv', 'R-6Rv'): x['z1'] = round(L['C_DROP'] + 0.5, 3); x['name'] = x['name'].replace(', through LVL5 line', '')
     if x['id'] in ('R-1Rv', 'R-3Rv', 'R-2Rv'): x['z0'] = round((L['OLDTB'] if x['y0'] < 28 else L['OLDTR']) + 0.1, 3)
     if x['id'] in ('D2-PL', 'R2-XD'): x['z1'] = round(L['J2B'] - 0.02, 3)
-    if x['id'] in ('T-37', 'T-38'): x['z0'] = round((L['C_BATH'] if x['y0'] >= 28 else L['C_FAM']) - 0.06, 3); x['z1'] = round((L['OLDTR'] if x['y0'] >= 28 else L['OLDTB']) + 0.05, 3)
+    if x['id'] in ('T-35', 'T-36', 'T-37', 'T-38', 'T-33', 'T-34'): x['z0'] = round((L['C_BATH'] if x['id'] == 'T-37' else L['C_DROP']) - 0.06, 3); x['z1'] = round(L['C_DROP'] + 0.5, 3)
 import re as _re
 _nm = {}
 for e in E:

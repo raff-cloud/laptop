@@ -2,11 +2,10 @@ import json
 M=json.load(open('model.json')); L=M['levels']; E=M['elements']; by={e['id']:e for e in E}
 fd=[e for e in E if e['name'].startswith('Ex. fdn - rear wing south (42')][0]
 M['clashes'].append(dict(a='S-9v',b=fd['id'],an=by['S-9v']['name'],bn='Old rear-wing foundation wall + sill plate (10")',kind='HARD',vol=0.05))
-J2B=L['J2B']; n=0
-for b in M['bulkheads']:
-    if b['lvl']!='S': continue
-    d=by[b['id']]; n+=1; depth=d['z1']-d['z0']; pad=2/12; fl=(L['FFL1R'] if (d['y0']+d['y1'])/2>=28 else L['FFL1'])
-    E.append(dict(id=f'BH-{n}',name=f'Bulkhead (Oct 22) - {d["name"].split(" (")[0]}',cat='bulkhead',shape='box',lvl='S',x0=round(d['x0']-pad,3),x1=round(d['x1']+pad,3),y0=round(d['y0']-pad,3),y1=round(d['y1']+pad,3),z0=round(d['z0']-0.1,3),z1=round(J2B,3),mat='bulkhead',clear=round(d['z0']-0.1-fl,2)))
+CD=L['C_DROP']
+for k,(nm,x0,x1,y0,y1,fl) in enumerate([('master bedroom',0.98,16.44,0.15,13.25,L['FFL1']),('family rm / hall',0.98,13.3,13.25,28.0,L['FFL1']),
+        ('hall / laundry / W.I.C. (existing ceiling on red joists)',5.0,16.44,28.0,40.2,L['FFL1R']),('mech room',5.0,16.2,40.2,43.67,L['FFL1R']),('bedroom 2',0.69,16.2,44.27,55.97,L['FFL1R'])]):
+    E.append(dict(id=f'BH-{k+1}',name=f'Dropped ceiling (Nov 10) - {nm}',cat='bulkhead',shape='box',lvl='S',x0=x0,x1=x1,y0=y0,y1=y1,z0=round(CD-0.04,3),z1=round(CD,3),mat='bulkhead',clear=round(CD-fl,2)))
 def fi(v): 
     f=int(v); i=round((v-f)*12*4)/4
     if i>=12: f+=1;i-=12
@@ -20,13 +19,12 @@ M['ceil']=[dict(level='Basement (slab to u/s joists)',ft=fi(L['J0B'])),
  dict(level='Main floor - main room (David: 118")',ft=fi(L['CEIL0']-L['FFL0'])),
  dict(level='Main floor - kitchen (David: 9 ft)',ft=fi(L['CEIL0R']-L['FFL0'])),
  dict(level='Main floor - addition / family rm (David: 105")',ft=fi(L['CEIL0A']-L['FFL0'])),
- dict(level='2nd zone 1 - primary bedroom, under the old platform (David: 105")',ft=fi(L['C_MAS']-L['FFL1'])),
- dict(level='2nd zone 2 - family rm / stair, under blue old joists (David: 105"); void above ~'+str(round((L['DECK']-L['OLDTB'])*12))+'"',ft=fi(L['C_FAM']-L['FFL1'])),
- dict(level='2nd zone 3 - hall / laundry / W.I.C., under red old joists; void above 16" (measured)',ft=fi(L['C_RED']-L['FFL1R'])),
- dict(level='2nd zone 3 - bath, dropped ceiling (David: 99")',ft=fi(L['C_BATH']-L['FFL1R'])),
- dict(level='2nd - mech room (David: 101" now, to go to 120")',ft=fi(L['CEIL1']-L['FFL1R'])),
- dict(level='2nd zone 4 - bedroom 2 (David: 120")',ft=fi(L['CEIL1']-L['FFL1R'])),
+ dict(level='2nd - master bedroom, dropped ceiling (was 105")',ft=fi(L['C_DROP']-L['FFL1'])),
+ dict(level='2nd - family rm / stair hall, dropped ceiling (was 105")',ft=fi(L['C_DROP']-L['FFL1'])),
+ dict(level='2nd - hall / laundry / W.I.C., existing ceiling on red joists (16" void above)',ft=fi(L['C_DROP']-L['FFL1R'])),
+ dict(level='2nd - bath, dropped ceiling (David: 99")',ft=fi(L['C_BATH']-L['FFL1R'])),
+ dict(level='2nd - mech room + bedroom 2, dropped ceiling (was ~120")',ft=fi(L['C_DROP']-L['FFL1R'])),
  dict(level='3rd floor (116.90 to top plate 119.60)',ft=fi(L['TOP']-L['FFL2']))]
 M['windows']=[dict(id=e['id'],name=e['name'],lvl=e['lvl'],w=fi(max(e['x1']-e['x0'],e['y1']-e['y0'])),sill=fi(e['z0']-({'B':0,'G':L['FFL0'],'S':L['FFL1'],'T':L['FFL2']}[e['lvl']] if not (e['lvl']=='S' and e['y0']>=27.9) else L['FFL1R'])),head=fi(e['z1']-({'B':0,'G':L['FFL0'],'S':L['FFL1'],'T':L['FFL2']}[e['lvl']] if not (e['lvl']=='S' and e['y0']>=27.9) else L['FFL1R']))) for e in E if e['cat'] in('window','door') and e['mat']=='glass']
 json.dump(M,open('model.json','w'))
-print(n,'bulkheads'); print(M['rooms']); print(M['ceil']); print(len(M['windows']),'windows')
+print('ok'); print(M['rooms']); print(M['ceil']); print(len(M['windows']),'windows')

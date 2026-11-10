@@ -17,7 +17,8 @@ L['C_MAS'] = round(L['FFL1'] + 105/12, 3); L['C_FAM'] = round(L['FFL1'] + 105/12
 L['DECK'] = round(L['FFL2'] - 3/12, 3)    # 3rd-floor deck on sleepers / knee-wall plates over the old joists
 L['OLDBB'] = round(L['C_FAM'] + 0.04, 3); L['OLDTB'] = round(L['OLDBB'] + 5.5/12, 3)      # blue: single 2x6 assumed above the 105" ceiling
 L['OLDTR'] = round(L['DECK'] - 16/12, 3); L['OLDBR'] = round(L['OLDTR'] - 5.5/12, 3)      # red: 16" void measured on site (Raff, room beside the 2nd-floor furnace room); 2x6 assumed
-L['C_RED'] = round(L['OLDBR'] - 0.04, 3)   # hall / laundry ceiling implied by the 16" void; bath has a dropped ceiling at 99" (David)
+L['C_RED'] = round(L['OLDBR'] - 0.04, 3)
+L['C_DROP'] = L['C_RED']   # Nov 10 (Raff): one dropped ceiling plane across the whole 2nd floor at the red-zone ceiling elevation   # hall / laundry ceiling implied by the 16" void; bath has a dropped ceiling at 99" (David)
 L['OLDT'] = L['OLDTB']; L['OLDB'] = L['OLDBB']; L['CEIL1V'] = L['C_FAM']
 L['CEIL0'] = round(L['J1B'] - 0.05, 3); L['CEIL0R'] = round(L['J1BR'] - 0.05, 3); L['CEIL0A'] = round(L['J1BA'] - 0.05, 3); L['CEIL1'] = round(L['J2B'] - 0.05, 3); L['CEIL2'] = round(L['TOP'], 3)
 E = []
@@ -158,7 +159,7 @@ def wall_boxes():
             z0, z1 = ffl(lv, y0), STRUCT_TOP[lv] if lv != 'T' else L['TOP']
             if lv == 'B': z1 = L['J0B']
             if lv == 'G': z1 = gtop(y0)
-            if lv == 'S': z1 = (L['C_MAS'] if y1 <= VF + 0.35 else L['C_FAM'] if y1 <= REAR + 0.35 else L['C_RED'] if y1 <= VR + 0.35 else L['J2B'])
+            if lv == 'S': z1 = L['C_DROP']
             n += 1
             wid = f'W{lv}{n}'
             th = min(x1-x0, y1-y0)
@@ -254,6 +255,9 @@ joists('SL-R', '3rd-floor deck sleepers on knee wall (2x4 flat)', 'S', L['DECK']
 # Site finding Oct 25: old joists at the original peak sit ~12" below the new 3rd-floor joists; knee walls make up the height
 joists('JO-B', 'Ex. old joists - blue zone over family rm (2x6 assumed, above the 105" ceiling)', 'S', L['OLDTB'], 5.5/12, 'x', 16, 0.98, 13.3, VF, REAR, 'oldjoist')
 joists('JO-R', 'Ex. old joists - red zone over hall / bath / laundry (16" void above, measured; 2x6 assumed)', 'S', L['OLDTR'], 5.5/12, 'x', 16, 5.0, 16.44, REAR, VR, 'oldjoist')
+# Nov 10: dropped ceiling framing (2x2 furring on hangers) wherever the old joists are not already at the dropped elevation
+for nm, x0, x1, y0, y1 in [('master bedroom', 0.98, 16.44, 0.15, VF), ('family rm / hall', 0.98, 13.3, VF, REAR), ('mech room', 5.0, 16.2, VR, 43.67), ('bedroom 2', 0.69, 16.2, 44.27, 55.97)]:
+    joists('DC-' + nm.split()[0], f'Dropped ceiling furring 2x2 @16" on hangers - {nm}', 'S', L['C_DROP'] + 0.04 + 1.5/12, 1.5/12, 'x', 16, x0, x1, y0, y1, 'lumber')
 for i, (y0, y1, nm) in enumerate([(VF, VF + 0.29, 'front end'), (REAR - 0.15, REAR + 0.15, 'at the 2nd-floor step'), (VR - 0.29, VR, 'rear end')]):
     zt = L['OLDTB'] if i == 0 else L['OLDTR']
     box(f'KW-{i}', f'Knee wall on old joists - {nm} (layout TBC)', 'wall', 'S', 0.98 if i < 2 else 5.0, 16.44, y0, y1, zt, L['DECK'] - 1.5/12, 'kneewall')

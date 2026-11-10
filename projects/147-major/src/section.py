@@ -38,21 +38,22 @@ rect(0.15, F1 - 0.06, ST, F1, 'floor'); rect(ST, F1R - 0.06, RW, F1R, 'floor')
 rect(ST - 0.15, F1R, ST + 0.15, F1, 'floor')
 rect(7.16, F2 - 0.06, RW, F2, 'floor')
 # zone 1: existing platform at the original peak (joists on joists)
-joists(0.15, VF, DK, DK - CM - 0.04, 'jy', 1.0); line(0.15, CM, VF, CM, 'ceil')
+joists(0.15, VF, DK, DK - CM - 0.04, 'jy', 1.0); line(0.15, CM, VF, CM, 'lvl')
 # zone 2: blue old joists over the 105" ceiling, knee wall + sleepers to the 3rd-floor deck
-joists(VF, ST, OTB, 5.5 / 12, 'jb'); line(VF, CF, ST, CF, 'ceil')
+joists(VF, ST, OTB, 5.5 / 12, 'jb'); line(VF, CF, ST, CF, 'lvl')
 rect(VF, OTB, ST, DK, 'void'); rect(VF, DK - 0.125, ST, DK, 'sleep')
 # zone 3: red old joists over the 99" ceiling
 joists(ST, VR, OTR, 5.5 / 12, 'jr'); line(ST, CB, VR, CB, 'ceil'); line(ST, CBATH, 36.3, CBATH, 'lvl'); text(ST + 0.3, CBATH - 0.5, 'bath dropped ceiling 8\'-3" (David)', 'call')
 rect(ST, OTR, VR, DK, 'void'); rect(ST, DK - 0.125, VR, DK, 'sleep')
 for y in (VF, ST, VR - 0.3): rect(y, OTB if y < ST else OTR, y + 0.3, DK - 0.125, 'kw')
 # mech room + zone 4: new 9-1/2" TJIs at full depth
-joists(VR, 56.0, J2T, 9.5 / 12, 'jn'); line(VR, L['CEIL1'], RW, L['CEIL1'], 'ceil')
+joists(VR, 56.0, J2T, 9.5 / 12, 'jn')
 # ducts
-rect(VF + 0.3, OTB + 0.03, ST - 0.3, OTB + 0.70, 'ductx'); text(VF + 0.4, CF - 1.5, 'A + Z are 8" deep - void here is only ~6"', 'callx')
+rect(0.9, CF - 0.68, ST - 0.3, CF, 'duct'); text(7.0, CF - 0.45, 'Trunk A + return Z hung under the platform / blue joists', 'ductt', 'middle')
+rect(0.15, CB, RW, CB + 0.125, 'dropc'); text(0.6, CB - 0.55, 'NEW DROPPED CEILING - one plane at the red-zone ceiling elevation (Nov 10)', 'callx')
 rect(ST + 0.3, OTR + 0.03, VR - 0.4, OTR + 0.70, 'duct'); text((ST + VR) / 2, OTR + 0.36, 'Trunk C 18x8 + return Y 16x8 (void 16" measured)', 'ductt', 'middle')
-rect(0.9, CM - 0.68, VF, CM, 'duct'); rect(0.75, CM - 0.85, VF, CM, 'bulk'); text((0.9 + VF) / 2, CM - 0.45, 'A 10x8 in bulkhead', 'ductt', 'middle')
-rect(VR + 0.2, J2B - 0.68, RW - 0.3, J2B, 'duct'); rect(VR + 0.05, J2B - 0.85, RW - 0.2, L['CEIL1'], 'bulk'); text((VR + RW) / 2, J2B - 0.45, 'C / B + branches in bulkhead', 'ductt', 'middle')
+
+rect(VR + 0.2, J2B - 0.68, RW - 0.3, J2B, 'duct'); text((VR + RW) / 2, J2B - 0.45, 'C / B + branches above dropped ceiling', 'ductt', 'middle')
 rect(41.84, F1R, 43.6, F1R + 5.3, 'equip'); text(42.72, F1R + 2.6, 'F-2', 'eqt', 'middle')
 rect(1.96, 0, 4.32, 5.3, 'equip'); text(3.14, 2.6, 'F-1', 'eqt', 'middle')
 rect(4.3, J0B - 0.5, 31.0, J0B, 'duct'); text(18, J0B - 0.25, 'F-1 trunks D / F / E under basement joists', 'ductt', 'middle')
@@ -72,17 +73,17 @@ for z, lab in [(0, 'FIN. BASEMENT SLAB  107.63'), (GR, 'ESTABLISHED GRADE  109.9
                (F1R, 'FIN. SECOND FLOOR (rear)  ~13" lower'), (F2, 'FIN. THIRD FLOOR  116.90'), (TOP, 'TOP OF DBL PLATE  119.60')]:
     line(-6, z, 61.5, z, 'lvl'); text(61.7, z, lab, 'lvlt')
 # zone dims (ceiling heights)
-dim(10.0, F1, CM, fi(CM - F1)); text(1.0, F1 + 5.6, '1  primary bedroom', 'zone')
-dim(14.2, F1, CF, fi(CF - F1)); text(20.5, F1 + 1.4, '2  family rm / stair', 'zone')
+dim(10.0, F1, CB, fi(CB - F1)); text(1.0, F1 + 5.6, '1  primary bedroom', 'zone')
+dim(14.2, F1, CB, fi(CB - F1)); text(20.5, F1 + 1.4, '2  family rm / stair', 'zone')
 dim(31.0, F1R, CB, fi(CB - F1R)); text(33.0, F1R + 2.6, '3  hall / bath / laundry', 'zone')
-dim(53.0, F1R, L['CEIL1'], fi(L['CEIL1'] - F1R)); text(46.0, F1R + 5.6, '4  bedroom 2', 'zone')
+dim(53.0, F1R, CB, fi(CB - F1R)); text(46.0, F1R + 5.6, '4  bedroom 2', 'zone')
 dim(12.0, F0, L['CEIL0'], fi(L['CEIL0'] - F0)); dim(36.0, F0, L['CEIL0R'], fi(L['CEIL0R'] - F0)); dim(50.0, F0, L['CEIL0A'], fi(L['CEIL0A'] - F0))
 dim(15.0, 0, J0B, fi(J0B)); dim(30.0, F2, TOP, fi(TOP - F2))
 text(1.5, F0 + 6.5, 'EXIST. LIVING / DINING', 'room'); text(30, F0 + 6.5, 'KITCHEN', 'room'); text(45, F0 + 6.5, 'FAMILY ROOM', 'room')
 text(19, F2 + 5.5, 'BEDROOM 3 / ENSUITE / W.I.C.', 'room'); text(46, F2 + 5.5, 'PRIMARY BEDROOM', 'room'); text(6, 4.5, 'BASEMENT', 'room')
 # callouts
 text(0.6, DK + 0.5, 'Existing platform at the original peak - joists on joists (yellow)', 'cally')
-text(VF + 0.4, CF - 0.55, 'Blue old joists over the 105" ceiling (2x6 assumed)', 'callb')
+text(VF + 0.4, CB - 1.25, 'Blue old joists (2x6 assumed) - old 105" ceiling comes down', 'callb')
 text(ST + 0.4, CB - 0.55, 'Red old joists - 16" void above (measured)', 'callr')
 text(ST + 0.6, DK + 1.35, 'Knee wall + sleepers bring the deck to 116.90 (green)', 'callg')
 text(ST + 0.2, F1 + 0.35, '2R step (~13")', 'call')
@@ -93,7 +94,7 @@ CSS = {
  'grade': ('var(--sg)', 'none', 0), 'slab': ('var(--sc)', 'none', 0), 'fdn': ('var(--sc)', 'var(--sk)', .6), 'extw': ('var(--sw)', 'var(--sk)', .6),
  'floor': ('var(--sk)', 'none', 0), 'jband': ('none', 'none', 0), 'j': ('var(--sj)', 'none', 0), 'jnband': ('none', 'none', 0), 'jn': ('var(--sn)', 'none', 0),
  'jbband': ('none', 'none', 0), 'jb': ('#2F67CF', 'none', 0), 'jrband': ('none', 'none', 0), 'jr': ('#D33A2C', 'none', 0),
- 'void': ('rgba(46,160,90,.14)', '#2E9E5A', 1.2), 'sleep': ('#2E9E5A', 'none', 0), 'jyband': ('none', 'none', 0), 'jy': ('#D9A400', 'none', 0), 'ceil': ('none', 'var(--sk)', 1.4), 'ductx': ('rgba(211,47,47,.25)', '#D32F2F', 1.2), 'kw': ('#2E9E5A', 'none', 0), 'duct': ('var(--sd)', 'var(--sk)', .5), 'bulk': ('rgba(229,138,0,.18)', '#E08A00', 1),
+ 'void': ('rgba(46,160,90,.14)', '#2E9E5A', 1.2), 'sleep': ('#2E9E5A', 'none', 0), 'jyband': ('none', 'none', 0), 'jy': ('#D9A400', 'none', 0), 'ceil': ('none', 'var(--sk)', 1.4), 'dropc': ('#D32F2F', 'none', 0), 'ductx': ('rgba(211,47,47,.25)', '#D32F2F', 1.2), 'kw': ('#2E9E5A', 'none', 0), 'duct': ('var(--sd)', 'var(--sk)', .5), 'bulk': ('rgba(229,138,0,.18)', '#E08A00', 1),
  'equip': ('var(--se)', 'var(--sk)', .5), 'stair': ('none', 'var(--sk)', .8), 'roof': ('var(--sr)', 'none', 0), 'roofs': ('var(--sr)', 'none', 0),
  'lvl': ('none', 'var(--sl)', .5), 'dim': ('none', 'var(--sk)', .7)}
 TXT = {'t': (9, 'var(--sk)', 400), 'dimt': (9.5, 'var(--sk)', 700), 'lvlt': (8.5, 'var(--sm)', 500), 'zone': (10, 'var(--sk)', 700), 'room': (8.5, 'var(--sm)', 600),
